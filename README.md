@@ -1,47 +1,89 @@
-# Svelte + Vite
+# **WeatherAppPlus**
 
 This template should help get you started developing with Svelte in Vite.
+## **Description**
 
-## Recommended IDE Setup
+WeatherAppPlus is a modern web application that provides users with current weather information and a 5-day forecast for multiple locations. With a clean and intuitive user interface, users can effortlessly add and manage their favorite locations, toggle between Celsius and Fahrenheit for temperature display, and enjoy dynamic backgrounds that change based on weather conditions. Powered by the reliable OpenWeatherMap API, WeatherAppPlus seamlessly integrates weather data while maintaining code quality, modularity, and extensive test coverage. Experience the convenience and elegance of WeatherAppPlus on both desktop and mobile devices.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+## **Installation**
 
-## Need an official Svelte framework?
+To run WeatherAppPlus locally, follow these steps:
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+1. Clone the repository:
 
-## Technical considerations
+    ```bash
+    git clone https://github.com/yourusername/WeatherAppPlus.git
+    ```
 
-**Why use this over SvelteKit?**
+2. Navigate to the project directory:
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+    ```bash
+    cd WeatherAppPlus
+    ```
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+3. Install dependencies:
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+    ```bash
+    npm install
+    ```
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+## **Usage**
 
-**Why include `.vscode/extensions.json`?**
+To start the development server and view WeatherAppPlus in your browser, run:
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+```bash
+npm run dev
 ```
+
+Open your web browser and navigate to **`http://localhost:5174/`** to see the application.
+
+## **Features**
+
+- [ ]  Display current weather details for default location on app load.
+- [ ]  Allow users to search and add multiple locations for weather information.
+- [ ]  Provide a 5-day weather forecast for selected location(s).
+- [ ]  Visually appealing and responsive design for desktop and mobile devices.
+- [ ]  Geolocation to automatically detect user's location and display its weather.
+- [ ]  Unit conversion allowing users to switch between Celsius and Fahrenheit.
+- [ ]  Dynamic backgrounds changing based on weather conditions.
+
+## **API Integration**
+
+WeatherAppPlus utilizes the OpenWeatherMap API to fetch weather data. Handle API responses and errors gracefully, and implement a loading indicator while waiting for API data.
+
+## **Project Structure**
+
+The project is organized as follows:
+
+```csharp
+csharpCopy code
+WeatherAppPlus/
+│
+├── public/            # Public assets
+├── src/               # Source files
+│   ├── components/    # Reusable UI components
+│   ├── styles/        # CSS styles
+│   ├── utils/         # Utility functions
+│   └── App.svelte     # Main component
+│
+├── tests/             # Unit tests
+├── .gitignore         # Git ignore file
+├── LICENSE            # License file
+└── README.md          # Project README
+
+```
+
+## **Testing**
+
+WeatherAppPlus includes unit tests for critical parts of the application, such as data fetching and rendering components.
+
+## **License**
+
+This project is licensed under the MIT License - see the [LICENSE](https://chat.openai.com/c/LICENSE) file for details.
+
+## **Contact**
+
+For any inquiries or feedback, please contact Matthijs Blauw.
+
+matthijs.blauw@gmail.com
