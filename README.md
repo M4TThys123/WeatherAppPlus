@@ -1,6 +1,5 @@
 # **WeatherAppPlus**
 
-This template should help get you started developing with Svelte in Vite.
 ## **Description**
 
 WeatherAppPlus is a modern web application that provides users with current weather information and a 5-day forecast for multiple locations. With a clean and intuitive user interface, users can effortlessly add and manage their favorite locations, toggle between Celsius and Fahrenheit for temperature display, and enjoy dynamic backgrounds that change based on weather conditions. Powered by the reliable OpenWeatherMap API, WeatherAppPlus seamlessly integrates weather data while maintaining code quality, modularity, and extensive test coverage. Experience the convenience and elegance of WeatherAppPlus on both desktop and mobile devices.
