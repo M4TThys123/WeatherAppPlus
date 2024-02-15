@@ -1,24 +1,24 @@
 <script>
-    import svelteLogo from './assets/svelte.svg'
-    import viteLogo from '/vite.svg'
-    import Counter from './lib/Counter.svelte'
     import HeaderComponent from "./lib/components/HeaderComponent.svelte";
     import HeroComponent from "./lib/components/HeroComponent.svelte";
     import ForecastComponent from "./lib/components/ForecastComponent.svelte";
+    import LocationsComponent from "./lib/components/LocationsComponent.svelte";
 </script>
 
 <HeaderComponent></HeaderComponent>
 
+<main class="container">
+    <div class="row">
+        <LocationsComponent></LocationsComponent>
 
+        <HeroComponent></HeroComponent>
 
-<main>
-    <HeroComponent ></HeroComponent>
-
-    <ForecastComponent></ForecastComponent>
+        <ForecastComponent></ForecastComponent>
+    </div>
 </main>
 
 <style>
-    main{
+    main {
         padding: 0 1em;
     }
 

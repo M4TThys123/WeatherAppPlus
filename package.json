@@ -1,5 +1,5 @@
 {
-  "name": "my-svelte-project",
+  "name": "WeahterAppPlus",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,8 +9,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@sveltejs/kit": "^2.5.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "rollup-plugin-copy": "^3.5.0",
     "svelte": "^4.2.10",
     "vite": "^5.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "typescript": "^5.3.3"
   }
 }
