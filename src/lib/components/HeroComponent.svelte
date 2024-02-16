@@ -1,6 +1,6 @@
 <script>
-        // import CloudSvg from "./CloudSvg.svelte";
 
+import CloudSVG from "./CloudSVG.svelte";
 </script>
 
 <section class="hero-section col-md-6">
@@ -12,8 +12,8 @@
             <p class="hero-feeltemp">Feels like 6℃</p>
             <p>Few Clouds</p>
         </section>
-                <div class="hero-icon__wrapper">
-<!--            <CloudSvg  ></CloudSvg>-->
+        <div class="hero-icon__wrapper">
+           <CloudSVG></CloudSVG>
         </div>
     </div>
 </section>
@@ -48,15 +48,16 @@
         margin-bottom: 2px;
     }
 
-    .hero-description{
+    .hero-description {
         font-size: 20px;
         font-weight: bold;
     }
-    .hero-feeltemp{
+
+    .hero-feeltemp {
         margin-bottom: 4px;
     }
 
-    .hero-icon__wrapper{
+    .hero-icon__wrapper {
         margin-top: -15px;
         width: 175px;
         height: 175px;
