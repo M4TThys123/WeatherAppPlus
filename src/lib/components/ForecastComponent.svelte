@@ -9,7 +9,7 @@
     ];
 </script>
 
-<section class="forecast-section col-md-6">
+<section class="forecast-section  mb-5">
     <div class="forcast-heading">
         <i class='bx bxs-calendar'></i>
         Next 5 days
@@ -52,15 +52,7 @@
         margin-bottom: 6px;
     }
 
-    .forcast-heading::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        background: var(--line-color);
-        bottom: -6px;
-        left: 0;
-    }
+
 
     .forcast-row {
         margin-top: 20px;
@@ -79,7 +71,7 @@
         width: 100%;
         height: 1px;
         background: var(--line-color);
-        bottom: -12px;
+        top: -12px;
         left: 0;
     }
 

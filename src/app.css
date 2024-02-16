@@ -15,6 +15,12 @@
   --light: #F3F3F3;
   --grey: #666F87;
   --line-color: #5C6575;
+
+  /*Bootstrap Colors*/
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
 }
 *{
   margin: 0;

@@ -1,5 +1,5 @@
 <script>
-        import CloudSvg from "./CloudSvg.svelte";
+        // import CloudSvg from "./CloudSvg.svelte";
 
 </script>
 
@@ -13,7 +13,7 @@
             <p>Few Clouds</p>
         </section>
                 <div class="hero-icon__wrapper">
-            <CloudSvg  ></CloudSvg>
+<!--            <CloudSvg  ></CloudSvg>-->
         </div>
     </div>
 </section>

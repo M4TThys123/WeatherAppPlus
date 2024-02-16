@@ -1,11 +1,13 @@
 <script>
-    import HeaderComponent from "./lib/components/HeaderComponent.svelte";
+    import Header from "./lib/components/Header.svelte";
+    import Footer from "./lib/components/Footer.svelte";
+
     import HeroComponent from "./lib/components/HeroComponent.svelte";
     import ForecastComponent from "./lib/components/ForecastComponent.svelte";
     import LocationsComponent from "./lib/components/LocationsComponent.svelte";
 </script>
 
-<HeaderComponent></HeaderComponent>
+<Header></Header>
 
 <main class="container">
     <div class="row">
@@ -17,9 +19,12 @@
     </div>
 </main>
 
+<Footer></Footer>
+
 <style>
     main {
-        padding: 0 1em;
+        margin-top: 2em;
+        padding: 0 2em;
     }
 
 </style>
