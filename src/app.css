@@ -27,7 +27,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+html{
+  background: var(--blue);
+}
 body{
   background: linear-gradient(0deg, rgba(20,83,154,1) 0%, rgba(72,137,211,1) 100%);
   color: var(--light);

@@ -5,8 +5,8 @@ import CloudSVG from "./CloudSVG.svelte";
 
 <section class="hero-section col-md-6">
     <div class="hero-wrapper">
-        <h2 class="hero-title">My hero</h2>
-        <p class="hero-subtitle">Amsterdam</p>
+        <h2 class="hero-title">My location</h2>
+        <p class="hero-subtitle">Obdam</p>
         <p class="hero-temperature">8℃</p>
         <section class="hero-description">
             <p class="hero-feeltemp">Feels like 6℃</p>
