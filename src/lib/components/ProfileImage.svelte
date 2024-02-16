@@ -1,5 +1,5 @@
 <figure class="footer-image__mask">
-    <img class="footer-image" src="/src/assets/profile-picture.png" alt="Image of Matthijs Blauw"/>
+    <img class="footer-image" src="https://media.licdn.com/dms/image/D4E03AQEvgNXXzuIynA/profile-displayphoto-shrink_400_400/0/1708060120365?e=1713398400&v=beta&t=lVclY99CMU9IsLl-4ZXP_hNIWipSoE5QLMRKhPIX3WA" alt="Image of Matthijs Blauw"/>
 </figure>
 
 <style>
