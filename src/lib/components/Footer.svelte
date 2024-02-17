@@ -8,12 +8,12 @@
 <footer class="mt-5">
     <div class="container footer-container">
         <nav class="row">
-            <a href="https://www.linkedin.com/in/matthijs-blauw-9a9573235/" class="col-6">
+            <a href="https://www.linkedin.com/in/matthijs-blauw-9a9573235/" class="col-6" target="_blank">
                 <ProfileImage></ProfileImage>
             </a>
 
 
-            <a href="https://www.matthijsblauw.nl/" class="col-6">
+            <a href="https://www.matthijsblauw.nl/" class="col-6" target="_blank">
                 <LogoImage></LogoImage>
             </a>
         </nav>
@@ -21,9 +21,9 @@
         <nav class="flex-row text-center">
             <h4>Links</h4>
             <div class="flex-row">
-                <a href="https://ilojo-bar-gbwo.vercel.app" class="footer-link">Ilojo Bar</a>
-                <a href="https://www.matthijsblauw.nl/" class="footer-link">Portfolio</a>
-                <a href="/discover" class="footer-link">GitHub Repo</a>
+                <a href="https://ilojo-bar-gbwo.vercel.app" class="footer-link" target="_blank">Ilojo Bar</a>
+                <a href="https://www.matthijsblauw.nl/" class="footer-link" target="_blank">Portfolio</a>
+                <a href="https://github.com/M4TThys123/WeatherAppPlus" class="footer-link" target="_blank">GitHub Repo</a>
             </div>
 
             <div class="flex-row mt-3">
