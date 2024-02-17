@@ -1,5 +1,23 @@
+
 <script>
     import SearchComponent from "./SearchComponent.svelte";
+    import { onMount, onDestroy } from 'svelte';
+
+    let searchActive = false;
+
+    const activateSearch = () => {
+        searchActive = true;
+    };
+
+    const deactivateSearch = () => {
+        searchActive = false;
+    };
+
+    onMount(() => {
+        return () => {
+            searchActive = false;
+        };
+    });
 </script>
 
 <header class="header">
@@ -10,13 +28,15 @@
                 <span class="brand-name">WeatherAppPlus</span>
             </div>
         </a>
-        <button class="search-btn">
+        <button class="search-btn" on:click={activateSearch}>
             <i class='bx bx-search'></i>
         </button>
     </nav>
 </header>
 
-<SearchComponent></SearchComponent>
+{#if searchActive}
+    <SearchComponent on:close={deactivateSearch} />
+{/if}
 
 <style>
     .header{

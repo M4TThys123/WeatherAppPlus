@@ -15,7 +15,7 @@
                 const data = await response.json();
                 mapboxSearchResults = data.features;
             } else {
-                mapboxSearchResults = null;
+                mapboxSearchResults = null; // Reset search results if query is empty
             }
         }, 300);
     };
@@ -23,6 +23,14 @@
     const previewCity = (searchResult) => {
         console.log('Previewing city:', searchResult.place_name);
         // Add your logic for previewing a city here
+    };
+
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
+    const closeSearch = () => {
+        dispatch('close');
     };
 
     // Cleanup function to clear the timeout
@@ -35,7 +43,7 @@
 
 <div class="container">
     <div class="search-wrapper">
-        <button class="close-search__btn">
+        <button class="close-search__btn"  on:click={closeSearch}>
             <i class='bx bx-left-arrow-alt'></i>
         </button>
 
@@ -47,7 +55,7 @@
                 class="search-input bg-transparent"
         />
 
-        <button class="clear-search__btn" on:click={() => {searchQuery = ''}}>
+        <button class="clear-search__btn" on:click={() => {searchQuery = ''; mapboxSearchResults = null;}}>
             <i class='bx bx-x'></i>
         </button>
     </div>
