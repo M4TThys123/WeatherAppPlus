@@ -1,3 +1,7 @@
+<script>
+    import SearchComponent from "./SearchComponent.svelte";
+</script>
+
 <header class="header">
     <nav class="nav">
         <a href="/" class="logo-link">
@@ -11,6 +15,8 @@
         </button>
     </nav>
 </header>
+
+<SearchComponent></SearchComponent>
 
 <style>
     .header{

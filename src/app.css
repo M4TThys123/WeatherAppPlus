@@ -31,10 +31,20 @@ html{
   background: var(--blue);
 }
 body{
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
   background: linear-gradient(0deg, rgba(20,83,154,1) 0%, rgba(72,137,211,1) 100%);
   color: var(--light);
 }
 
+body {
+
+}
+li{
+ list-style: none;
+}
 
 
 a {
@@ -46,11 +56,6 @@ a:hover {
   color: black;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
 
 #app {
   max-width: 1280px;
