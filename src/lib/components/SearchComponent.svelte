@@ -25,7 +25,7 @@
         // Add your logic for previewing a city here
     };
 
-    import { createEventDispatcher } from 'svelte';
+    import {createEventDispatcher} from 'svelte';
 
     const dispatch = createEventDispatcher();
 
@@ -41,9 +41,9 @@
     });
 </script>
 
-<div class="container">
+<div class="search-container container">
     <div class="search-wrapper">
-        <button class="close-search__btn"  on:click={closeSearch}>
+        <button class="close-search__btn" on:click={closeSearch}>
             <i class='bx bx-left-arrow-alt'></i>
         </button>
 
@@ -60,31 +60,52 @@
         </button>
     </div>
 
+    <div class="search-result__wrapper">
+        {#if mapboxSearchResults}
+            <ul
+                    class="search-result__list py-2 px-1"
+            >
+                {#each mapboxSearchResults as searchResult (searchResult.id)}
+                    <li
+                            class="search-result__item py-2 cursor-pointer "
+                            on:click={() => previewCity(searchResult)}
+                    >
+                        <div class="search-text__wrapper">
+                            <i class='bx bx-current-location'></i>
 
-    {#if mapboxSearchResults}
-        <ul
-                class="search-result__list py-2 px-1"
-        >
-            {#each mapboxSearchResults as searchResult (searchResult.id)}
-                <li
-                        class="search-result__item py-2 cursor-pointer "
-                        on:click={() => previewCity(searchResult)}
-                >
-                    <div class="search-text__wrapper">
-                        <i class='bx bx-current-location'></i>
-
-                        {searchResult.place_name}
-                    </div>
-                    <div class="search-icon__wrapper">
-                        <i class='bx bx-search'></i>
-                    </div>
-                </li>
-            {/each}
-        </ul>
-    {/if}
+                            {searchResult.place_name}
+                        </div>
+                        <div class="search-icon__wrapper">
+                            <i class='bx bx-search'></i>
+                        </div>
+                    </li>
+                {/each}
+            </ul>
+        {/if}
+    </div>
 </div>
 
 <style>
+    .search-container {
+        z-index: 10;
+    }
+
+    .search-container::before {
+        content: '';
+        z-index: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--search-background);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .search-result__wrapper{
+        z-index: 10 !important;
+        position: absolute;
+    }
+
     .search-wrapper {
         position: relative;
     }
@@ -125,7 +146,7 @@
     }
 
     .search-result__list {
-
+        z-index: 3 !important;
     }
 
     .search-result__item {
