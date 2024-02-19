@@ -41,6 +41,10 @@
     });
 </script>
 
+<div class="search-background">
+
+</div>
+
 <div class="search-container container">
     <div class="search-wrapper">
         <button class="close-search__btn" on:click={closeSearch}>
@@ -55,7 +59,14 @@
                 class="search-input bg-transparent"
         />
 
-        <button class="clear-search__btn" on:click={() => {searchQuery = ''; mapboxSearchResults = null;}}>
+        <button class="clear-search__btn" on:click={() => {
+    if(searchQuery === '') {
+        closeSearch();
+    } else {
+        searchQuery = '';
+        mapboxSearchResults = null;
+    }
+}}>
             <i class='bx bx-x'></i>
         </button>
     </div>
@@ -88,10 +99,11 @@
 <style>
     .search-container {
         z-index: 10;
+        position: absolute;
+        top: 0;
     }
 
-    .search-container::before {
-        content: '';
+    .search-background {
         z-index: 0;
         width: 100vw;
         height: 100vh;
@@ -101,7 +113,7 @@
         left: 0;
     }
 
-    .search-result__wrapper{
+    .search-result__wrapper {
         z-index: 10 !important;
         position: absolute;
     }
@@ -109,6 +121,7 @@
     .search-wrapper {
         position: relative;
     }
+
 
     .close-search__btn, .clear-search__btn {
         position: absolute;
@@ -121,6 +134,10 @@
     }
 
     input {
+        margin-top: 7px;
+        padding-left: 4px;
+
+
         border-top: none;
         border-right: none;
         border-left: none;
@@ -142,7 +159,7 @@
     }
 
     .search-wrapper i {
-        font-size: 24px;
+        font-size: 34px;
     }
 
     .search-result__list {

@@ -58,7 +58,9 @@ a:hover {
   color: black;
 }
 
-
+i {
+  color: var(--light) !important;
+}
 
 button {
   font-weight: 500;

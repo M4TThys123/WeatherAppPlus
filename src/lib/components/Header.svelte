@@ -51,11 +51,12 @@
     }
     .logo-wrapper{
         font-size: 24px;
-        color: white;
         font-weight: 700;
         display: flex;
         align-items: center;
     }
+
+
 
     .brand-name{
         margin-left: 4px;
