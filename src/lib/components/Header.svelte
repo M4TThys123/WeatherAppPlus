@@ -1,4 +1,3 @@
-
 <script>
     import SearchComponent from "./SearchComponent.svelte";
     import { onMount, onDestroy } from 'svelte';
@@ -7,15 +6,18 @@
 
     const activateSearch = () => {
         searchActive = true;
+        document.body.classList.add('no-scroll'); // Add the class to disable scrolling
     };
 
     const deactivateSearch = () => {
         searchActive = false;
+        document.body.classList.remove('no-scroll'); // Remove the class to enable scrolling
     };
 
     onMount(() => {
         return () => {
             searchActive = false;
+            document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled when component is destroyed
         };
     });
 </script>
