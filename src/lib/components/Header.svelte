@@ -56,10 +56,9 @@
         align-items: center;
     }
 
-
-
     .brand-name{
         margin-left: 4px;
+        color: var(--light);
     }
 
     .search-btn{

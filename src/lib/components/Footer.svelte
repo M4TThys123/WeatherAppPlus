@@ -13,7 +13,7 @@
             </a>
 
 
-            <a href="https://www.matthijsblauw.nl/" class="col-6" target="_blank">
+            <a href="https://www.matthijsblauw.nl/" class="col-6">
                 <LogoImage></LogoImage>
             </a>
         </nav>
