@@ -41,9 +41,10 @@ body{
   color: var(--light);
 }
 
-body {
-
+body.no-scroll {
+  overflow: hidden;
 }
+
 li{
  list-style: none;
 }

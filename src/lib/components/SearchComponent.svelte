@@ -4,6 +4,7 @@
     let searchQuery = '';
     let mapboxSearchResults = null;
     let queryTimeout = null;
+    let searchError = null;
 
     const mapboxAPIKey = 'pk.eyJ1Ijoiam9obmtvbWFybmlja2kiLCJhIjoiY2t5NjFzODZvMHJkaDJ1bWx6OGVieGxreSJ9.IpojdT3U3NENknF6_WhR2Q';
 
@@ -11,9 +12,13 @@
         clearTimeout(queryTimeout);
         queryTimeout = setTimeout(async () => {
             if (searchQuery !== '') {
-                const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchQuery)}.json?access_token=${mapboxAPIKey}&types=place`);
-                const data = await response.json();
-                mapboxSearchResults = data.features;
+                try{
+                    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchQuery)}.json?access_token=${mapboxAPIKey}&types=place`);
+                    const data = await response.json();
+                    mapboxSearchResults = data.features;
+                } catch {
+                    searchError.value = true
+                }
             } else {
                 mapboxSearchResults = null; // Reset search results if query is empty
             }
@@ -22,7 +27,6 @@
 
     const previewCity = (searchResult) => {
         console.log('Previewing city:', searchResult.place_name);
-        // Add your logic for previewing a city here
     };
 
     import {createEventDispatcher} from 'svelte';
@@ -77,6 +81,14 @@
             <ul
                     class="search-result__list py-2 px-1"
             >
+                {#if searchError}
+                <p>Sorry, something went wrong, please try again.</p>
+                {/if}
+
+                {#if !searchError && mapboxSearchResults.length === 0}
+                    <p>No results match your query, try a different term.</p>
+                {/if}
+
                 {#each mapboxSearchResults as searchResult (searchResult.id)}
                     <li
                             class="search-result__item py-2 cursor-pointer "
@@ -122,7 +134,7 @@
 
     .search-result__wrapper {
         z-index: 10 !important;
-        position: absolute;
+        position: relative;
     }
 
     .search-wrapper {

@@ -3,6 +3,8 @@
 import CloudSVG from "./CloudSVG.svelte";
 </script>
 
+
+
 <section class="hero-section col-md-6">
     <div class="hero-wrapper">
         <h2 class="hero-title">My location</h2>

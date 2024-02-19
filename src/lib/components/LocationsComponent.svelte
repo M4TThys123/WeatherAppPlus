@@ -12,7 +12,7 @@ import MyLocationComponent from "./MyLocationComponent.svelte";
     .locations-section{
         z-index: 9999;
         position: absolute;
-        padding: 1em;
+        padding: 1em 2em;
         width: 100%;
         bottom: 1em;
     }
