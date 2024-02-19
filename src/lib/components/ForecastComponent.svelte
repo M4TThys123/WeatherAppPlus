@@ -7,16 +7,25 @@
         {day: 'Day 4', temp: '7℃'},
         {day: 'Day 5', temp: '4℃'}
     ];
+
+    // Calculate next 5 days
+    let today = new Date();
+    for (let i = 0; i < 5; i++) {
+        let nextDay = new Date();
+        nextDay.setDate(today.getDate() + i);
+        let dayOfWeek = nextDay.toLocaleDateString('en-US', {weekday: 'long'});
+        forecastData[i].day = dayOfWeek;
+    }
 </script>
 
-<section class="forecast-section  mb-5">
-    <div class="forcast-heading">
+<section class="forecast-section mb-5">
+    <div class="forecast-heading">
         <i class='bx bxs-calendar'></i>
         Next 5 days
     </div>
 
     {#each forecastData as forecast}
-        <div class="forcast-row">
+        <div class="forecast-row">
             <span class="forecast-day">{forecast.day}</span>
             <div class="forecast-icon__wrapper">
                 <svg data-v-5ed3171e="" viewBox="0 0 148 148" class="owm-weather-icon">
@@ -43,7 +52,7 @@
 
     }
 
-    .forcast-heading {
+    .forecast-heading {
         position: relative;
         text-transform: uppercase;
         font-weight: bold;
@@ -54,7 +63,7 @@
 
 
 
-    .forcast-row {
+    .forecast-row {
         margin-top: 20px;
         font-size: 24px;
         font-weight: bold;
@@ -65,7 +74,7 @@
         justify-content: space-between;
     }
 
-    .forcast-row::after {
+    .forecast-row::after {
         content: '';
         position: absolute;
         width: 100%;

@@ -26,6 +26,7 @@
     };
 
     import {createEventDispatcher} from 'svelte';
+    import LocationsComponent from "./LocationsComponent.svelte";
 
     const dispatch = createEventDispatcher();
 
@@ -45,7 +46,7 @@
 
 </div>
 
-<div class="search-container container">
+<div class="search-container">
     <div class="search-wrapper">
         <button class="close-search__btn" on:click={closeSearch}>
             <i class='bx bx-left-arrow-alt'></i>
@@ -96,15 +97,21 @@
     </div>
 </div>
 
+    <LocationsComponent></LocationsComponent>
 <style>
     .search-container {
         z-index: 10;
-        position: absolute;
         top: 0;
+
+
+        padding: 0 1rem;
+        position: absolute;
+        width: 100%;
+
     }
 
     .search-background {
-        z-index: 0;
+        z-index: 1;
         width: 100vw;
         height: 100vh;
         background: var(--search-background);
@@ -129,8 +136,16 @@
 
     }
 
+    .close-search__btn i {
+        margin-left: -4px;
+    }
+
     .clear-search__btn {
         right: 0;
+    }
+
+    .clear-search__btn i {
+        margin-right: -4px;
     }
 
     input {
