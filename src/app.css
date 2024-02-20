@@ -45,6 +45,13 @@ body.no-scroll {
   overflow: hidden;
 }
 
+#app{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 li{
  list-style: none;
 }

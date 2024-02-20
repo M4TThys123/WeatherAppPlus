@@ -42,9 +42,10 @@
 
 <style>
     .header{
-        padding: 0.75rem 1rem;
-        max-width: 1280px;
         margin: 0 auto;
+        padding: 0.75rem 1rem;
+        width: 100%;
+        max-width: 1280px;
     }
 
     .nav{
