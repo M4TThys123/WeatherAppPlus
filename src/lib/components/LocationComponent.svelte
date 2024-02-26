@@ -1,11 +1,23 @@
 <script>
+    export let isMyLocation;
+    export let dispatch
+
+    function handleCloseClick() {
+        dispatch('close');
+        console.log("Werkt kanker hard")
+    }
 </script>
 
-<section class="location-section col-md-6 mb-3">
+<section class="location-section col-md-6 mb-3" on:click={handleCloseClick}>
     <div class="location-wrapper">
         <div class="location-top d-flex justify-content-between">
             <div>
-                <h3 class="location-title">Amsterdam</h3>
+                {#if isMyLocation}
+                    <h3 class="location-title">My location</h3>
+                    <span class="location-subtitle">Obdam</span>
+                {:else}
+                    <h3 class="location-title">Amsterdam</h3>
+                {/if}
             </div>
 
             <span class="location-temperature">8℃</span>

@@ -1,7 +1,7 @@
 <script>
+    import LocationsComponent from "./LocationsComponent.svelte";
     import {onMount, onDestroy} from 'svelte';
     import {createEventDispatcher} from 'svelte';
-    import LocationsComponent from "./LocationsComponent.svelte";
 
     let searchQuery = '';
     let mapboxSearchResults = null;
@@ -18,6 +18,7 @@
                     const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchQuery)}.json?access_token=${mapboxAPIKey}&types=place`);
                     const data = await response.json();
                     mapboxSearchResults = data.features;
+                    console.log(mapboxSearchResults) //
                 } catch {
                     searchError.value = true
                 }
@@ -28,7 +29,13 @@
     };
 
     const previewCity = (searchResult) => {
+        console.log('function werkt kanker hard')
+        console.log(searchResult);
         console.log('Previewing city:', searchResult.place_name);
+        const [city, state] = searchResult.place_name.split(",")
+        console.log(city, state)
+
+        closeSearch()
     };
 
 
@@ -93,7 +100,7 @@
                     {#each mapboxSearchResults as searchResult (searchResult.id)}
                         <li
                                 class="search-result__item py-2 cursor-pointer "
-                                on:click={() => previewCity(searchResult), closeSearch()}
+                                on:click={() => previewCity(searchResult)}
                         >
                             <div class="search-text__wrapper">
                                 <i class='bx bx-current-location'></i>
@@ -111,7 +118,7 @@
     </div>
 
 
-    <LocationsComponent on:click={closeSearch()}></LocationsComponent>
+    <LocationsComponent {dispatch}/>
 
 </div>
 <style>

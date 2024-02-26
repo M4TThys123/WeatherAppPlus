@@ -1,12 +1,13 @@
 <script>
 import LocationComponent from "./LocationComponent.svelte";
-import MyLocationComponent from "./MyLocationComponent.svelte";
+export let dispatch;
 </script>
 
 <section class="locations-section col-md-6">
     <h2 class="mb-3">My Locations</h2>
-    <MyLocationComponent></MyLocationComponent>
-    <LocationComponent></LocationComponent>
+    <LocationComponent isMyLocation={true} {dispatch}></LocationComponent>
+    <LocationComponent isMyLocation={false} {dispatch}></LocationComponent>
+<!--    <LocationComponent isMyLocation={false} ></LocationComponent>-->
 </section>
 
 <style>

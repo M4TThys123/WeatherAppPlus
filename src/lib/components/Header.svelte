@@ -4,18 +4,20 @@
 
     let searchActive = false;
 
-    const activateSearch = () => {
+    function activateSearch() {
         searchActive = true;
         document.body.classList.add('no-scroll'); // Add the class to disable scrolling
-    };
+    }
 
-    const deactivateSearch = () => {
+    export function deactivateSearch() {
         searchActive = false;
-        document.body.classList.remove('no-scroll'); // Remove the class to enable scrolling
-    };
+        document.body.classList.remove('no-scroll');
+    }
 
-    onMount(() => {
-        return () => {
+    // Using function expression for onMount
+    onMount(function() {
+        // Returning a cleanup function
+        return function() {
             searchActive = false;
             document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled when component is destroyed
         };
@@ -37,7 +39,7 @@
 </header>
 
 {#if searchActive}
-    <SearchComponent on:close={deactivateSearch} />
+    <SearchComponent on:close={deactivateSearch}/>
 {/if}
 
 <style>
