@@ -66,7 +66,6 @@
         margin-bottom: 6px;
     }
 
-
     .forecast-row {
         margin-top: 20px;
         font-size: 24px;

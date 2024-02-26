@@ -4,6 +4,7 @@ import MyLocationComponent from "./MyLocationComponent.svelte";
 </script>
 
 <section class="locations-section col-md-6">
+    <h2 class="mb-3">My Locations</h2>
     <MyLocationComponent></MyLocationComponent>
     <LocationComponent></LocationComponent>
 </section>
