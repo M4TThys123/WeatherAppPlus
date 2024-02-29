@@ -1,14 +1,14 @@
 <script>
+
     export let isMyLocation;
     export let dispatch
 
     function handleCloseClick() {
         dispatch('close');
-        console.log("Werkt kanker hard")
     }
 </script>
 
-<section class="location-section col-md-6 mb-3" on:click={handleCloseClick}>
+<section class="location-section col-md-6" on:click={handleCloseClick}>
     <div class="location-wrapper">
         <div class="location-top d-flex justify-content-between">
             <div>

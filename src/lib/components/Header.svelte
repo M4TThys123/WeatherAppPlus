@@ -1,8 +1,10 @@
 <script>
+    // Import components
     import SearchComponent from "./SearchComponent.svelte";
+
     import { onMount, onDestroy } from 'svelte';
 
-    let searchActive = false;
+    let searchActive = true;
 
     function activateSearch() {
         searchActive = true;
