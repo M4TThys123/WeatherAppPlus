@@ -1,13 +1,17 @@
 <script>
-    // Packages
-    import { Router, Route } from 'svelte-routing';
-
-    // Components
+    // Import Components
     import Header from "./lib/components/Header.svelte";
     import Footer from "./lib/components/Footer.svelte";
 
     import HeroComponent from "./lib/components/HeroComponent.svelte";
     import ForecastComponent from "./lib/components/ForecastComponent.svelte";
+
+    // Import Packages
+    import { Router, Route } from 'svelte-routing';
+
+    // Variables
+    let temperatureUnit = 'Celsius'; // Default temperature unit
+    console.log('App.svelte:', temperatureUnit)
 </script>
 
 <Router>
@@ -15,7 +19,7 @@
 </Router>
 
 
-<Header></Header>
+<Header {temperatureUnit}></Header>
 
 <main class="container">
     <div class="row">

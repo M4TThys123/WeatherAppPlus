@@ -12,17 +12,17 @@
   --dark-blue: #0D3562;
   --blue: #14539a;
   --dark: #101010;
+  --light-dark: #1C1B1D;
   --light: #F3F3F3;
-  --grey: #666F87;
+  --grey: #202123;
   --line-color: #5C6575;
 
-  --search-background: #202124;
 
-  /*Bootstrap Colors*/
-  --bs-gray-600: #6c757d;
-  --bs-gray-700: #495057;
-  --bs-gray-800: #343a40;
-  --bs-gray-900: #212529;
+  --search-background: var(--dark);
+  --search-secondary-background: var(--light-dark) ;
+
+  /*--search-background: var(--grey);*/
+  /*--search-secondary-background: var(--light-dark) ;*/
 }
 *{
   margin: 0;

@@ -1,12 +1,16 @@
 <script>
+    // Import Components
     import LocationsComponent from "./LocationsComponent.svelte";
+
     import {onMount, onDestroy} from 'svelte';
     import {createEventDispatcher} from 'svelte';
+    import SwitchUnitButton from "./SwitchUnitButton.svelte";
 
     let searchQuery = '';
     let mapboxSearchResults = null;
     let queryTimeout = null;
     let searchError = null;
+    let temperatureUnit = 'Celsius'; // Default temperature unit
 
     const mapboxAPIKey = 'pk.eyJ1Ijoiam9obmtvbWFybmlja2kiLCJhIjoiY2t5NjFzODZvMHJkaDJ1bWx6OGVieGxreSJ9.IpojdT3U3NENknF6_WhR2Q';
 
@@ -18,7 +22,7 @@
                     const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchQuery)}.json?access_token=${mapboxAPIKey}&types=place`);
                     const data = await response.json();
                     mapboxSearchResults = data.features;
-                    console.log(mapboxSearchResults) //
+                    console.log(mapboxSearchResults)
                 } catch {
                     searchError.value = true
                 }
@@ -29,21 +33,21 @@
     };
 
     const previewCity = (searchResult) => {
-        console.log('function werkt kanker hard')
         console.log(searchResult);
-        console.log('Previewing city:', searchResult.place_name);
         const [city, state] = searchResult.place_name.split(",")
-        console.log(city, state)
 
         closeSearch()
     };
-
-
 
     const dispatch = createEventDispatcher();
 
     const closeSearch = () => {
         dispatch('close');
+    };
+
+    const toggleTemperatureUnit = () => {
+        temperatureUnit = temperatureUnit === 'Celsius' ? 'Fahrenheit' : 'Celsius';
+        console.log(temperatureUnit)
     };
 
     // Cleanup function to clear the timeout
@@ -53,91 +57,78 @@
         };
     });
 </script>
-<div class="search-background">
 
-</div>
+<div class="navigation-background">
+    <div class="navigation-container">
+        <div class="search-container">
+            <div class="search-wrapper">
+                <button class="close-search__btn" on:click={closeSearch}>
+                    <i class='bx bx-left-arrow-alt'></i>
+                </button>
 
-<div class="search-container__wrapper">
-    <div class="search-container">
-        <div class="search-wrapper">
-            <button class="close-search__btn" on:click={closeSearch}>
-                <i class='bx bx-left-arrow-alt'></i>
-            </button>
+                <input
+                        type="text"
+                        bind:value={searchQuery}
+                        on:input={getSearchResults}
+                        placeholder="Search for a city"
+                        class="search-input backround bg-transparent"
+                />
 
-            <input
-                    type="text"
-                    bind:value={searchQuery}
-                    on:input={getSearchResults}
-                    placeholder="Search for a city"
-                    class="search-input bg-transparent"
-            />
+                <button class="clear-search__btn" on:click={() => {
+                    if(searchQuery === '') {
+                        closeSearch();
+                    } else {
+                        searchQuery = '';
+                        mapboxSearchResults = null;
+                    }
+                }}>
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
 
-            <button class="clear-search__btn" on:click={() => {
-    if(searchQuery === '') {
-        closeSearch();
-    } else {
-        searchQuery = '';
-        mapboxSearchResults = null;
-    }
-}}>
-                <i class='bx bx-x'></i>
-            </button>
+            <div class="search-result__wrapper">
+                {#if mapboxSearchResults}
+                    <ul
+                            class="search-result__list py-2 px-1"
+                    >
+                        {#if searchError}
+                            <p>Sorry, something went wrong, please try again.</p>
+                        {/if}
+
+                        {#if !searchError && mapboxSearchResults.length === 0}
+                            <p>No results match your query, try a different term.</p>
+                        {/if}
+
+                        {#each mapboxSearchResults as searchResult (searchResult.id)}
+                            <li
+                                    class="search-result__item py-2 cursor-pointer "
+                                    on:click={() => previewCity(searchResult)}
+                            >
+                                <div class="search-text__wrapper">
+                                    <i class='bx bx-current-location'></i>
+
+                                    {searchResult.place_name}
+                                </div>
+                                <div class="search-icon__wrapper">
+                                    <i class='bx bx-search'></i>
+                                </div>
+                            </li>
+                        {/each}
+                    </ul>
+                {/if}
+            </div>
         </div>
 
-        <div class="search-result__wrapper">
-            {#if mapboxSearchResults}
-                <ul
-                        class="search-result__list py-2 px-1"
-                >
-                    {#if searchError}
-                        <p>Sorry, something went wrong, please try again.</p>
-                    {/if}
+        <div class="navigation-bottom__container">
+            <SwitchUnitButton {toggleTemperatureUnit}></SwitchUnitButton>
 
-                    {#if !searchError && mapboxSearchResults.length === 0}
-                        <p>No results match your query, try a different term.</p>
-                    {/if}
-
-                    {#each mapboxSearchResults as searchResult (searchResult.id)}
-                        <li
-                                class="search-result__item py-2 cursor-pointer "
-                                on:click={() => previewCity(searchResult)}
-                        >
-                            <div class="search-text__wrapper">
-                                <i class='bx bx-current-location'></i>
-
-                                {searchResult.place_name}
-                            </div>
-                            <div class="search-icon__wrapper">
-                                <i class='bx bx-search'></i>
-                            </div>
-                        </li>
-                    {/each}
-                </ul>
-            {/if}
+            <LocationsComponent {dispatch}/>
         </div>
     </div>
-
-
-    <LocationsComponent {dispatch}/>
-
 </div>
+
 <style>
-    .search-container {
-        z-index: 10;
-        top: 0;
-
-
-        padding: 0 1rem;
-        position: absolute;
-        width: 100%;
-        margin: 0 auto;
-
-    }
-
-
-
-
-    .search-background {
+    .navigation-background {
         z-index: 1;
         width: 100vw;
         height: 100vh;
@@ -146,10 +137,24 @@
         top: 0;
         left: 0;
     }
+    .navigation-container{
+        padding: 0 1rem 2em;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .search-container {
+        z-index: 10;
+        top: 0;
+        width: 100%;
+        margin: 0 auto;
+
+    }
 
     .search-result__wrapper {
         z-index: 10 !important;
-        position: relative;
     }
 
     .search-wrapper {
@@ -175,6 +180,9 @@
         margin-right: -4px;
     }
 
+
+
+
     input {
         margin-top: 7px;
         padding-left: 4px;
@@ -191,6 +199,8 @@
         width: 100%;
         padding: 10px 30px; /* Adjust the padding as needed */
     }
+
+
 
     input::placeholder {
         color: #9CA3AF;
@@ -214,11 +224,9 @@
         justify-content: space-between;
     }
 
-    .search-text__wrapper {
-
-    }
-
-    .search-icon__wrapper {
-
+    .navigation-bottom__container{
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
     }
 </style>
