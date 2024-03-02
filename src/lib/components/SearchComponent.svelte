@@ -33,9 +33,12 @@
     };
 
     const previewCity = (searchResult) => {
-        console.log(searchResult);
-        const [city, state] = searchResult.place_name.split(",")
+        const [city, state] = searchResult.place_name.split(",");
+        const lat = searchResult.geometry.coordinates[1];
+        const lng = searchResult.geometry.coordinates[0];
 
+        // Redirect to the city view with parameters
+        window.location.href = `/weather/${state.trim().replaceAll(" ", "")}/${city.trim().replaceAll(" ", "")}?lat=${lat}&lng=${lng}&preview=true`;
         closeSearch()
     };
 
@@ -137,8 +140,9 @@
         top: 0;
         left: 0;
     }
+
     .navigation-container{
-        padding: 0 1rem 2em;
+        padding: .5em 1rem 2em;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -146,10 +150,6 @@
     }
 
     .search-container {
-        z-index: 10;
-        top: 0;
-        width: 100%;
-        margin: 0 auto;
 
     }
 
@@ -170,6 +170,7 @@
 
     .close-search__btn i {
         margin-left: -4px;
+        margin-top: -6px;
     }
 
     .clear-search__btn {
@@ -178,26 +179,26 @@
 
     .clear-search__btn i {
         margin-right: -4px;
+        margin-top: -6px;
     }
 
-
-
-
     input {
-        margin-top: 7px;
+        width: 100%;
+
+        /*margin-top: 7px;*/
         padding-left: 4px;
+        padding: 10px 30px; /* Adjust the padding as needed */
 
-
+        background: var(--search-secondary-background);
         border-top: none;
         border-right: none;
         border-left: none;
         border-bottom-width: 1px;
-        font-size: 100%;
         border-color: var(--light);
         outline: none;
+
         color: var(--light);
-        width: 100%;
-        padding: 10px 30px; /* Adjust the padding as needed */
+        font-size: 100%;
     }
 
 

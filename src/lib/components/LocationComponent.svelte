@@ -33,7 +33,7 @@
     .location-section{
         width: 100%;
         height: 115px;
-        background: var(--dark-blue);
+        background: var(--search-secondary-background);
         border-radius: 25px;
         padding: 1em 1.5em;
     }

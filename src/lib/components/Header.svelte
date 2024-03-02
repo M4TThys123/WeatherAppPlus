@@ -3,8 +3,9 @@
     import SearchComponent from "./SearchComponent.svelte";
 
     import { onMount, onDestroy } from 'svelte';
+    import AsyncCity from "./AsyncCity.svelte";
 
-    let searchActive = true;
+    let searchActive = false;
 
     function activateSearch() {
         searchActive = true;
@@ -43,6 +44,8 @@
 {#if searchActive}
     <SearchComponent on:close={deactivateSearch}/>
 {/if}
+
+<AsyncCity></AsyncCity>
 
 <style>
     .header{
