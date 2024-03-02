@@ -62,7 +62,7 @@
         text-transform: uppercase;
         font-weight: bold;
         font-size: 16px;
-        color: var(--grey);
+        color: var(--light-grey);
         margin-bottom: 6px;
     }
 
