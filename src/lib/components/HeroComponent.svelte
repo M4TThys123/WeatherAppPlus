@@ -1,6 +1,6 @@
 <script>
 
-import CloudSVG from "./CloudSVG.svelte";
+import CloudSVG from "./images/CloudSVG.svelte";
 </script>
 
 

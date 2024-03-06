@@ -1,9 +1,9 @@
 <script>
     // Import components
-    import SearchComponent from "./SearchComponent.svelte";
+    import SearchComponent from "../SearchComponent.svelte";
 
-    import { onMount, onDestroy } from 'svelte';
-    import AsyncCity from "./AsyncCity.svelte";
+    import { onMount} from 'svelte';
+    import AsyncCity from "../AsyncCity.svelte";
 
     let searchActive = false;
 
@@ -45,7 +45,6 @@
     <SearchComponent on:close={deactivateSearch}/>
 {/if}
 
-<AsyncCity></AsyncCity>
 
 <style>
     .header{

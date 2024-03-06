@@ -1,6 +1,6 @@
 <script>
-    import ProfileImage from "./ProfileImage.svelte";
-    import LogoImage from "./LogoImage.svelte";
+    import ProfileImage from "../images/ProfileImage.svelte";
+    import LogoImage from "../images/LogoImage.svelte";
 
     let currentYear = new Date().getFullYear();
 </script>
