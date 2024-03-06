@@ -1,21 +1,34 @@
 <script>
+    import CloudSVG from "./images/CloudSVG.svelte";
+    import {page} from '$app/stores';
+    import {onMount} from "svelte";
+    let city;
 
-import CloudSVG from "./images/CloudSVG.svelte";
+    onMount(() => {
+        const parts = $page.url.pathname.split('/');
+        city = parts[parts.length - 1];
+        console.log(city)
+    });
 </script>
 
 
 
 <section class="hero-section col-md-6">
     <div class="hero-wrapper">
-        <h2 class="hero-title">My location</h2>
-        <p class="hero-subtitle">Obdam</p>
+        {#if $page.url.pathname === '/'}
+            <h2 class="hero-title">Matthijs' locatie</h2>
+            <p class="hero-subtitle">Obdam</p>
+        {:else}
+            <h2 class="hero-title">{city}</h2>
+        {/if}
+
         <p class="hero-temperature">8℃</p>
         <section class="hero-description">
             <p class="hero-feeltemp">Feels like 6℃</p>
             <p>Few Clouds</p>
         </section>
         <div class="hero-icon__wrapper">
-           <CloudSVG></CloudSVG>
+            <CloudSVG></CloudSVG>
         </div>
     </div>
 </section>
@@ -65,8 +78,4 @@ import CloudSVG from "./images/CloudSVG.svelte";
         height: 175px;
     }
 
-    .hero-icon__wrapper svg {
-        width: 100%;
-        height: 100%;
-    }
 </style>
