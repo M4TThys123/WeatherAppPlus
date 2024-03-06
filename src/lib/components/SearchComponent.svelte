@@ -2,7 +2,7 @@
     // Import Components
     import LocationsComponent from "./LocationsComponent.svelte";
 
-    import {onMount, onDestroy} from 'svelte';
+    import {onMount} from 'svelte';
     import {createEventDispatcher} from 'svelte';
     import SwitchUnitButton from "./SwitchUnitButton.svelte";
 

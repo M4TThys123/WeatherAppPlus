@@ -1,0 +1,116 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	color-scheme: light dark;
+	font-synthesis: none;
+
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	/*Colors*/
+	--dark-blue: #0D3562;
+	--blue: #14539a;
+	--dark: #101010;
+	--light-dark: #1C1B1D;
+	--light: #F3F3F3;
+	--light-grey: #666F87;
+	--grey: #202123;
+	--line-color: #5C6575;
+
+
+	--search-background: var(--dark);
+	--search-secondary-background: var(--light-dark) ;
+
+	/*--search-background: var(--grey);*/
+	/*--search-secondary-background: var(--light-dark) ;*/
+}
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html{
+	background: var(--blue);
+}
+body{
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+
+	background: linear-gradient(0deg, rgba(20,83,154,1) 0%, rgba(72,137,211,1) 100%);
+	color: var(--light);
+}
+
+body.no-scroll {
+	overflow: hidden;
+}
+
+.app{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+li{
+	list-style: none;
+}
+
+
+a {
+	font-weight: 500;
+	/*color: var(--light);*/
+	text-decoration: inherit;
+}
+a:hover {
+	color: black;
+}
+
+i {
+	color: var(--light) !important;
+}
+
+button {
+	font-weight: 500;
+	font-family: inherit;
+	cursor: pointer;
+	background: none;
+	border: none;
+}
+button:hover {
+	border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+	outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+}
+
+/*===============  BREAKPOINTS ===============*/
+/* SM (for tablets - screens ≥ than 768px wide) */
+@media (width >= 768px) {
+
+}
+
+/* MD (for small laptops - screens ≥ than 992px wide) */
+@media (width >= 992px) {
+
+}
+
+/* LG (for laptops and desktops - screens ≥ than 1200px wide) */
+@media (width >= 1200px) {
+
+}

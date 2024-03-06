@@ -32,21 +32,11 @@
     import { onMount } from 'svelte';
 
     let weatherData;
-    // Replace wit data from
-    // let lat = /* provide actual latitude value */;
-    // let lng = /* provide actual longitude value */;
-
     // Amsterdam coordinates
     let lat = 52.3676;
     let lng = 4.9041;
 
     onMount(async () => {
         console.log(weatherData = await getWeatherData(lat, lng));
-        // weatherData = await getWeatherData(lat, lng)
     });
 </script>
-
-<!-- Your Svelte template -->
-<div>
-    <!-- Use weatherData here -->
-</div>
