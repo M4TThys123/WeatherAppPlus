@@ -143,10 +143,16 @@
 
     .navigation-container{
         padding: .5em 1rem 2em;
+        margin: 0 auto;
+
+        width: 100%;
+        max-width: 1280px;
         height: 100%;
+
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
     }
 
     .search-container {
