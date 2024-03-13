@@ -36,6 +36,7 @@
     let lat = 52.3676;
     let lng = 4.9041;
 
+
     onMount(async () => {
         console.log(weatherData = await getWeatherData(lat, lng));
     });

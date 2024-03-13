@@ -24,7 +24,7 @@
     <section class="hero-section col-md-6">
         <div class="hero-wrapper">
             {#if $page.url.pathname === '/'}
-                <h2 class="hero-title">Matthijs' locatie</h2>
+                <h2 class="hero-title">Matthijs' location</h2>
                 <p class="hero-subtitle">Obdam</p>
             {:else}
                 <h2 class="hero-title">{city}</h2>
@@ -35,8 +35,10 @@
                 <p class="hero-feeltemp">Feels like 6℃</p>
                 <p>Few Clouds</p>
             </section>
+            <div class="hero-icon__container">
             <div class="hero-icon__wrapper">
                 <CloudSVG></CloudSVG>
+            </div>
             </div>
         </div>
     </section>
@@ -79,6 +81,11 @@
 
     .hero-feeltemp {
         margin-bottom: 4px;
+    }
+    .hero-icon__container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .hero-icon__wrapper {
