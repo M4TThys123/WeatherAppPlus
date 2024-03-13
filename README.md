@@ -6,7 +6,7 @@ WeatherAppPlus is a modern web application that provides users with current weat
 
 ## **Installation**
 
-To run WeatherAppPlus locally, follow these steps:
+To run dWeatherAppPlus locally, follow these steps:
 
 1. Clone the repository:
 

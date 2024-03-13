@@ -13,7 +13,7 @@
         <div class="location-top d-flex justify-content-between">
             <div>
                 {#if isMyLocation}
-                    <h3 class="location-title">My location</h3>
+                    <h3 class="location-title">Matthijs' location</h3>
                     <span class="location-subtitle">Obdam</span>
                 {:else}
                     <h3 class="location-title">Amsterdam</h3>
