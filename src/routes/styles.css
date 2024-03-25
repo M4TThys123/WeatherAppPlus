@@ -71,6 +71,10 @@ i {
 	color: var(--light) !important;
 }
 
+p{
+	 margin-bottom: 0 !important;
+}
+
 button {
 	font-weight: 500;
 	font-family: inherit;

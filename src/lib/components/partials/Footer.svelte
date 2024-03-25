@@ -9,12 +9,16 @@
     <div class="container footer-container">
         <nav class="row">
             <a href="https://www.linkedin.com/in/matthijs-blauw-9a9573235/" class="col-6" target="_blank">
-                <ProfileImage></ProfileImage>
+                <div class="image-container">
+                    <ProfileImage></ProfileImage>
+                </div>
             </a>
 
 
             <a href="https://www.matthijsblauw.nl/" class="col-6">
-                <LogoImage></LogoImage>
+                <div class="image-container">
+                    <LogoImage></LogoImage>
+                </div>
             </a>
         </nav>
 
@@ -23,7 +27,8 @@
             <div class="flex-row">
                 <a href="https://ilojo-bar-gbwo.vercel.app" class="footer-link" target="_blank">Ilojo Bar</a>
                 <a href="https://www.matthijsblauw.nl/" class="footer-link" target="_blank">Portfolio</a>
-                <a href="https://github.com/M4TThys123/WeatherAppPlus" class="footer-link" target="_blank">GitHub Repo</a>
+                <a href="https://github.com/M4TThys123/WeatherAppPlus" class="footer-link" target="_blank">GitHub
+                    Repo</a>
             </div>
 
             <div class="flex-row mt-3">
@@ -58,6 +63,10 @@
         align-items: center;
     }
 
+    .image-container{
+        width: 100px;
+        height: 100px;
+    }
 
     .footer-link {
         margin: 0 1em;
@@ -66,12 +75,11 @@
         font-weight: bold;
     }
 
-    .social-icon{
+    .social-icon {
         color: var(--light);
         font-size: 35px;
         padding: 0 16px;
     }
-
 
 
     .copyright {

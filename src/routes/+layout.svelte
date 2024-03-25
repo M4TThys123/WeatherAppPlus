@@ -5,17 +5,19 @@
 
 	// Import Style
 	import './styles.css';
-	import AsyncCity from "$lib/components/AsyncCity.svelte";
+
+	// Metric
+	let units = 'metric'; // default to imperial
 </script>
 
-<AsyncCity></AsyncCity>
 
 <div class="app">
 	<Header></Header>
 
+
 	<main class="container">
 		<div class="row">
-		<slot />
+			<slot {units}></slot>
 		</div>
 	</main>
 
@@ -24,7 +26,6 @@
 
 <style>
 	main {
-		margin-top: 2em;
 		padding: 0 2em;
 	}
 </style>

@@ -1,9 +1,8 @@
 <script>
-    // Import components
+    // Import Components
     import SearchComponent from "../SearchComponent.svelte";
 
     import { onMount} from 'svelte';
-    import AsyncCity from "../AsyncCity.svelte";
 
     let searchActive = false;
 
