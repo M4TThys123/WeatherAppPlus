@@ -5,8 +5,10 @@ import BannerComponent from "$lib/components/BannerComponent.svelte";
 
 import { onMount } from 'svelte';
 
-export let units;
-console.log(units)
+// export let units
+// console.log(units)
+
+let units = "metric"
 
 
 let weatherData;

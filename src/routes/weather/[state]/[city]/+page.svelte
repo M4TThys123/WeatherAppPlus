@@ -3,7 +3,9 @@
     import ForecastComponent from "$lib/components/ForecastComponent.svelte";
     import BannerComponent from "$lib/components/BannerComponent.svelte";
 
-    export let units
+    // export let units
+    let units = "metric"
+
 
     console.log(`units zijn: ${units}`)
 
