@@ -28,16 +28,17 @@
 </script>
 
 <script>
-    // import { getWeatherData } from './path/to/module';
     import { onMount } from 'svelte';
 
     let weatherData;
-    // Amsterdam coordinates
-    let lat = 52.3676;
-    let lng = 4.9041;
-
+    let lat = 0;
+    let lng = 0;
 
     onMount(async () => {
+        const params = new URLSearchParams(window.location.search);
+        lat = parseFloat(params.get('lat'));
+        lng = parseFloat(params.get('lng'));
+
         console.log(weatherData = await getWeatherData(lat, lng));
     });
 </script>

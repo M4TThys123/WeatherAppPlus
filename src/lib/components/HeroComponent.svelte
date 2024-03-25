@@ -1,12 +1,14 @@
 <script>
-    import CloudSVG from "./images/CloudSVG.svelte";
-    import { page } from '$app/stores';
-    import { onMount } from "svelte";
+    import {page} from '$app/stores';
+    import {onMount} from "svelte";
+
+    export let weatherData
 
     let city;
     let isLoading = true;
 
     onMount(() => {
+        console.log($page.url)
         const parts = $page.url.pathname.split('/');
         city = parts[parts.length - 1];
         console.log(city);
@@ -28,17 +30,46 @@
                 <p class="hero-subtitle">Obdam</p>
             {:else}
                 <h2 class="hero-title">{city}</h2>
+                <p class="hero-subtitle">
+                    {
+                        new Date(weatherData.currentTime).toLocaleDateString(
+                            "en-us",
+                            {
+                                weekday: "short",
+                                day: "2-digit",
+                                month: "short"
+                            }
+                        )
+                    }
+                    {
+                        new Date(weatherData.currentTime).toLocaleTimeString(
+                            "en-us",
+                            {
+                                timeStyle: "short"
+                            }
+                        )
+                    }
+                </p>
             {/if}
 
-            <p class="hero-temperature">8℃</p>
+            <!--            <p class="hero-temperature">8&deg;C</p>-->
+            <p class="hero-temperature">
+                { Math.round(weatherData.current.temp)}&deg;C
+            </p>
+
             <section class="hero-description">
-                <p class="hero-feeltemp">Feels like 6℃</p>
-                <p>Few Clouds</p>
+                <p class="hero-feeltemp">
+                    Feels like { Math.round(weatherData.current.feels_like)}&deg;C
+                </p>
+                <!--                <p>Few Clouds</p>-->
+                { weatherData.current.weather[0].description}
             </section>
             <div class="hero-icon__container">
-            <div class="hero-icon__wrapper">
-                <CloudSVG></CloudSVG>
-            </div>
+                <div class="hero-icon__wrapper">
+                    <img src={`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
+                         alt="Current weather icon"
+                         class="hero-icon__image">
+                </div>
             </div>
         </div>
     </section>
@@ -82,7 +113,8 @@
     .hero-feeltemp {
         margin-bottom: 4px;
     }
-    .hero-icon__container{
+
+    .hero-icon__container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -90,8 +122,13 @@
 
     .hero-icon__wrapper {
         margin-top: -15px;
-        width: 175px;
-        height: 175px;
+        width: 150px;
+        height: 150px;
+    }
+
+    .hero-icon__image {
+        width: 100%;
+        height: auto;
     }
 
 </style>
