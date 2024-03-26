@@ -36,8 +36,7 @@
     .hourly-weather-section {
         max-width: 1024px;
         width: 100%;
-        padding-top: 3rem;
-        padding-bottom: 3rem;
+        padding: 3rem 0!important;
         color: white;
     }
 
