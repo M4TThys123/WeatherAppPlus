@@ -1,12 +1,11 @@
 <script>
-    import HeroComponent from "$lib/components/HeroComponent.svelte";
-    import ForecastComponent from "$lib/components/ForecastComponent.svelte";
     import BannerComponent from "$lib/components/BannerComponent.svelte";
+    import WeatherOverview from "$lib/components/WeatherOverview.svelte";
+    import HourlyWeather from "$lib/components/HourlyWeather.svelte";
+    import ForecastComponent from "$lib/components/ForecastComponent.svelte";
 
     // export let units
     let units = "metric"
-
-
     console.log(`units zijn: ${units}`)
 
     import { onMount } from 'svelte';
@@ -15,8 +14,6 @@
     let lat = 0;
     let lng = 0;
     let preview
-
-
 
     onMount(async () => {
         const params = new URLSearchParams(window.location.search);
@@ -58,6 +55,8 @@
 
 <BannerComponent {preview}></BannerComponent>
 
-<HeroComponent {weatherData}></HeroComponent>
+<WeatherOverview {weatherData}></WeatherOverview>
+
+<HourlyWeather {weatherData}></HourlyWeather>
 
 <ForecastComponent></ForecastComponent>

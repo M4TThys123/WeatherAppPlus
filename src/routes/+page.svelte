@@ -1,6 +1,7 @@
 <script>
-import HeroComponent from "$lib/components/HeroComponent.svelte";
+import WeatherOverview from "$lib/components/WeatherOverview.svelte";
 import ForecastComponent from "$lib/components/ForecastComponent.svelte";
+import HourlyWeather from "$lib/components/HourlyWeather.svelte";
 import BannerComponent from "$lib/components/BannerComponent.svelte";
 
 import { onMount } from 'svelte';
@@ -55,7 +56,9 @@ onMount(async () => {
 
 <BannerComponent></BannerComponent>
 
-<HeroComponent {weatherData}></HeroComponent>
+<WeatherOverview {weatherData}></WeatherOverview>
+
+<HourlyWeather {weatherData}></HourlyWeather>
 
 <ForecastComponent></ForecastComponent>
 
