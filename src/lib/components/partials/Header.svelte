@@ -2,7 +2,8 @@
     // Import Components
     import SearchComponent from "../SearchComponent.svelte";
 
-    import { onMount} from 'svelte';
+    import {onMount} from 'svelte';
+    import CurrentLocationComponent from "$lib/components/CurrentLocationComponent.svelte";
 
     let searchActive = false;
 
@@ -17,9 +18,9 @@
     }
 
     // Using function expression for onMount
-    onMount(function() {
+    onMount(function () {
         // Returning a cleanup function
-        return function() {
+        return function () {
             searchActive = false;
             document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled when component is destroyed
         };
@@ -34,9 +35,15 @@
                 <span class="brand-name">WeatherAppPlus</span>
             </div>
         </a>
-        <button class="search-btn" on:click={activateSearch}>
-            <i class='bx bx-search'></i>
-        </button>
+
+        <div class="button-wrapper">
+            <CurrentLocationComponent></CurrentLocationComponent>
+
+            <button class="search-btn" on:click={activateSearch}>
+                <i class='bx bx-search'></i>
+            </button>
+
+        </div>
     </nav>
 </header>
 
@@ -46,30 +53,36 @@
 
 
 <style>
-    .header{
+    .header {
         margin: 0 auto;
         padding: 0.75rem 1rem;
         width: 100%;
         max-width: 1280px;
     }
 
-    .nav{
+    .nav {
         display: flex;
         justify-content: space-between;
     }
-    .logo-wrapper{
+
+    .logo-wrapper {
         font-size: 24px;
         font-weight: 700;
         display: flex;
         align-items: center;
     }
 
-    .brand-name{
+    .brand-name {
         margin-left: 4px;
         color: var(--light);
     }
 
-    .search-btn{
+    .button-wrapper{
+        display: flex;
+        gap: 1em;
+    }
+
+    .search-btn {
         font-size: 24px;
         display: flex;
         align-items: center;
