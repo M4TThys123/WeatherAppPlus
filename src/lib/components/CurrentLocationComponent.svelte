@@ -21,9 +21,11 @@
                 }
                 const data = await response.json();
                 console.log(data);
-            }
 
-            catch (error) {
+                const [city, state] = data.features[0].place_name.split(",");
+                const redirectUrl = `/weather/${state.trim().replaceAll(" ", "")}/${city.trim().replaceAll(" ", "")}?lat=${lat}&lng=${lgn}&preview=true`;
+                window.location.href = redirectUrl;
+            } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
             }
         };
