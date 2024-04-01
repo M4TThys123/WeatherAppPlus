@@ -1,11 +1,11 @@
-<button>
-    <!--        on:click={findMyLocation()}>-->
+<button on:click={findMyLocation}>
     <i class='bx bx-current-location'></i>
 </button>
 
-
 <script>
-    import { onMount } from "svelte";
+    // import { onMount } from "svelte";
+
+    let mapboxAPIKey = 'pk.eyJ1Ijoiam9obmtvbWFybmlja2kiLCJhIjoiY2t5NjFzODZvMHJkaDJ1bWx6OGVieGxreSJ9.IpojdT3U3NENknF6_WhR2Q';
 
     const findMyLocation = async () => {
         const success = async (position) => {
@@ -14,16 +14,16 @@
             const lat = position.coords.latitude;
             console.log(lgn, lat);
 
-            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lgn}&localityLanguage=en`;
-
             try {
-                const response = await fetch(geoApiUrl);
+                const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lgn},${lat}.json?access_token=${mapboxAPIKey}&types=place`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
                 console.log(data);
-            } catch (error) {
+            }
+
+            catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
             }
         };
@@ -34,10 +34,6 @@
 
         navigator.geolocation.getCurrentPosition(success, error);
     };
-
-    onMount(() => {
-        findMyLocation();
-    });
 </script>
 
 
