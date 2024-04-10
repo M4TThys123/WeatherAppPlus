@@ -21,7 +21,7 @@
 <section class="forecast-section mb-5">
     <div class="forecast-wrapper">
         <div class="forecast-heading">
-            <i class='bx bxs-calendar'></i>
+            <i class='bx bxs-calendar forecast-icon'></i>
             Next 5 days
         </div>
 
@@ -62,8 +62,12 @@
         text-transform: uppercase;
         font-weight: bold;
         font-size: 16px;
-        color: var(--light-grey);
+        color: var(--light-grey) ;
         margin-bottom: 6px;
+    }
+
+    .forecast-icon{
+        color: var(--light-grey) !important;
     }
 
     .forecast-row {

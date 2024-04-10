@@ -17,9 +17,12 @@ let lat = 52.676145;
 let lng = 4.90843;
 const city = "Obdam"
 
+
+
 onMount(async () => {
 	console.log(city)
 	console.log(weatherData = await getWeatherData(lat, lng, units));
+
 });
 </script>
 
@@ -60,7 +63,7 @@ onMount(async () => {
 
 <HourlyWeather {weatherData}></HourlyWeather>
 
-<ForecastComponent></ForecastComponent>
+<ForecastComponent {weatherData}></ForecastComponent>
 
 
 <style>

@@ -59,4 +59,4 @@
 
 <HourlyWeather {weatherData}></HourlyWeather>
 
-<ForecastComponent></ForecastComponent>
+<ForecastComponent {weatherData}></ForecastComponent>
