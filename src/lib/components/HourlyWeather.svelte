@@ -32,7 +32,6 @@
 </section>
 
 <style>
-    /* Translate Tailwind CSS styles here */
     .hourly-weather-section {
         max-width: 1024px;
         width: 100%;
@@ -52,6 +51,7 @@
 
     .hourly-weather-items {
         display: flex;
+        gap: 1.5em;
     }
 
     .hourly-weather-item {
