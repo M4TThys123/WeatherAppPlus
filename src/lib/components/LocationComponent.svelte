@@ -10,9 +10,9 @@
     }
 </script>
 
-<section class="location-section col-md-6" on:click={handleCloseClick}>
+<section class="location-section w-full md:w-1/2" on:click={handleCloseClick}>
     <div class="location-wrapper">
-        <div class="location-top d-flex justify-content-between">
+        <div class="location-top flex justify-between">
             <div>
                 {#if isMyLocation}
                     <h3 class="location-title">Matthijs' location</h3>

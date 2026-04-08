@@ -5,33 +5,32 @@
     let currentYear = new Date().getFullYear();
 </script>
 
-<footer class="mt-5">
-    <div class="container footer-container">
-        <nav class="row">
-            <a href="https://www.linkedin.com/in/matthijs-blauw-9a9573235/" class="col-6" target="_blank">
+<footer class="mt-12">
+    <div class="footer-container">
+        <nav class="flex flex-wrap justify-center gap-8">
+            <a href="https://www.linkedin.com/in/matthijs-blauw-9a9573235/" target="_blank">
                 <div class="image-container">
                     <ProfileImage></ProfileImage>
                 </div>
             </a>
 
-
-            <a href="https://www.matthijsblauw.nl/" class="col-6">
+            <a href="https://www.matthijsblauw.nl/">
                 <div class="image-container">
                     <LogoImage></LogoImage>
                 </div>
             </a>
         </nav>
 
-        <nav class="flex-row text-center">
+        <nav class="text-center">
             <h4>Links</h4>
-            <div class="flex-row">
+            <div class="flex justify-center">
                 <a href="https://ilojo-bar-gbwo.vercel.app" class="footer-link" target="_blank">Ilojo Bar</a>
                 <a href="https://www.matthijsblauw.nl/" class="footer-link" target="_blank">Portfolio</a>
                 <a href="https://github.com/M4TThys123/WeatherAppPlus" class="footer-link" target="_blank">GitHub
                     Repo</a>
             </div>
 
-            <div class="flex-row mt-3">
+            <div class="flex justify-center mt-3">
                 <a href="https://www.linkedin.com/in/matthijs-blauw-9a9573235/" class="social-icon" target="_blank">
                     <i class="bx bxl-linkedin"></i>
                 </a>

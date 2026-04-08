@@ -10,7 +10,7 @@
         <div class="hourly-weather-wrapper">
             <div class="hourly-weather-items">
                 {#each weatherData.hourly as hourData (hourData.dt)}
-                    <div class="hourly-weather-item" style="flex-basis: 0; flex-grow: 1; flex-shrink: 0;">
+                    <div class="hourly-weather-item shrink-0 grow basis-0">
                         <p class="hourly-weather-time">
                             {new Date(hourData.currentTime).toLocaleTimeString("en-us", {hour: "numeric"})}
                         </p>

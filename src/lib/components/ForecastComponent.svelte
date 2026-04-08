@@ -11,7 +11,7 @@
     }
 </script>
 
-<section class="forecast-section mb-5">
+<section class="forecast-section mb-10">
     <div class="forecast-wrapper">
         <div class="forecast-heading">
             <i class='bx bxs-calendar forecast-icon'></i>

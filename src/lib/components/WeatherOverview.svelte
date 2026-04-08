@@ -25,7 +25,7 @@
 {#if isLoading}
     <div>Loading...</div>
 {:else}
-    <section class="hero-section col-md-6">
+    <section class="hero-section w-full md:w-1/2">
         <div class="hero-wrapper">
             {#if $page.url.pathname === '/'}
                 <h2 class="hero-title">Matthijs' location</h2>

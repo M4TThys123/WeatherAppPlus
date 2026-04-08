@@ -15,8 +15,8 @@
 	<Header></Header>
 
 
-	<main class="container">
-		<div class="row">
+	<main class="max-w-7xl mx-auto px-6 md:px-12">
+		<div class="flex flex-wrap">
 			<slot {units}></slot>
 		</div>
 	</main>
@@ -25,7 +25,4 @@
 </div>
 
 <style>
-	main {
-		padding: 0 2em;
-	}
 </style>

@@ -4,7 +4,7 @@ import LocationComponent from "./LocationComponent.svelte";
 export let dispatch;
 </script>
 
-<section class="locations-section col-md-6">
+<section class="locations-section w-full md:w-1/2">
     <h2 class="mb-3">My Locations</h2>
     <div class="locations-wrapper">
         <LocationComponent isMyLocation={true} {dispatch}></LocationComponent>
