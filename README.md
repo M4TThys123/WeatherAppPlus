@@ -1,88 +1,66 @@
-# **WeatherAppPlus**
+# WeatherAppPlus
 
-## **Description**
+Een moderne weer-applicatie gebouwd met SvelteKit. Toont actueel weer, uurlijkse voorspellingen en een 7-daagse forecast voor elke locatie ter wereld.
 
-WeatherAppPlus is a modern web application that provides users with current weather information and a 5-day forecast for multiple locations. With a clean and intuitive user interface, users can effortlessly add and manage their favorite locations, toggle between Celsius and Fahrenheit for temperature display, and enjoy dynamic backgrounds that change based on weather conditions. Powered by the reliable OpenWeatherMap API, WeatherAppPlus seamlessly integrates weather data while maintaining code quality, modularity, and extensive test coverage. Experience the convenience and elegance of WeatherAppPlus on both desktop and mobile devices.
+## Tech Stack
 
-## **Installation**
+- **Framework:** SvelteKit 2 + Svelte 4
+- **Styling:** Tailwind CSS v4
+- **Weer API:** Open-Meteo (gratis, geen key nodig)
+- **Geocoding:** Mapbox Geocoding API
+- **Build:** Vite 5
+- **TypeScript** met JSDoc annotations
 
-To run dWeatherAppPlus locally, follow these steps:
+## Features
 
-1. Clone the repository:
+- [x] Actueel weer voor standaardlocatie (Obdam)
+- [x] Zoeken op stad met Mapbox autocomplete
+- [x] Huidige locatie via browser GPS + reverse geocoding
+- [x] 7-daagse forecast
+- [x] Uurlijkse weerweergave (48 uur, scrollbaar)
+- [x] Responsive design (mobile-first)
+- [x] Preview modus voor nieuwe steden
+- [ ] Steden opslaan in localStorage
+- [ ] Temperatuur toggle (C/F)
+- [ ] Skeleton loading states
+- [ ] Page transitions
 
-    ```bash
-    git clone https://github.com/yourusername/WeatherAppPlus.git
-    ```
+## Installatie
 
-2. Navigate to the project directory:
+Vereist: Node.js 22+
 
-    ```bash
-    cd WeatherAppPlus
-    ```
+```bash
+git clone https://github.com/M4TThys123/WeatherAppPlus.git
+cd WeatherAppPlus
+nvm use
+npm install
+```
 
-3. Install dependencies:
+Maak een `.env` bestand aan (zie `.env.example`):
 
-    ```bash
-    npm install
-    ```
+```env
+PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token_here
+```
 
-
-## **Usage**
-
-To start the development server and view WeatherAppPlus in your browser, run:
+## Development
 
 ```bash
 npm run dev
 ```
 
-Open your web browser and navigate to **`http://localhost:5174/`** to see the application.
+Open `http://localhost:5173` in je browser.
 
-## **Features**
+## Scripts
 
-- [ ]  Display current weather details for default location on app load.
-- [ ]  Allow users to search and add multiple locations for weather information.
-- [ ]  Provide a 5-day weather forecast for selected location(s).
-- [ ]  Visually appealing and responsive design for desktop and mobile devices.
-- [ ]  Geolocation to automatically detect user's location and display its weather.
-- [ ]  Unit conversion allowing users to switch between Celsius and Fahrenheit.
-- [ ]  Dynamic backgrounds changing based on weather conditions.
+| Commando | Beschrijving |
+|----------|-------------|
+| `npm run dev` | Development server |
+| `npm run build` | Productie build |
+| `npm run preview` | Preview productie build |
+| `npm run check` | TypeScript type checking |
+| `npm run lint` | Prettier + ESLint check |
+| `npm run format` | Auto-format met Prettier |
 
-## **API Integration**
+## Contact
 
-WeatherAppPlus utilizes the OpenWeatherMap API to fetch weather data. Handle API responses and errors gracefully, and implement a loading indicator while waiting for API data.
-
-## **Project Structure**
-
-The project is organized as follows:
-
-```csharp
-csharpCopy code
-WeatherAppPlus/
-│
-├── public/            # Public assets
-├── src/               # Source files
-│   ├── components/    # Reusable UI components
-│   ├── styles/        # CSS styles
-│   ├── utils/         # Utility functions
-│   └── App.svelte     # Main component
-│
-├── tests/             # Unit tests
-├── .gitignore         # Git ignore file
-├── LICENSE            # License file
-└── README.md          # Project README
-
-```
-
-## **Testing**
-
-WeatherAppPlus includes unit tests for critical parts of the application, such as data fetching and rendering components.
-
-## **License**
-
-This project is licensed under the MIT License - see the [LICENSE](https://chat.openai.com/c/LICENSE) file for details.
-
-## **Contact**
-
-For any inquiries or feedback, please contact Matthijs Blauw.
-
-matthijs.blauw@gmail.com
+Matthijs Blauw - matthijs.blauw@gmail.com
