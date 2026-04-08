@@ -7,12 +7,17 @@
     import SwitchUnitButton from "./SwitchUnitButton.svelte";
 
     let searchQuery = '';
+    /** @type {any[] | null} */
     let mapboxSearchResults = null;
-    let queryTimeout = null;
-    let searchError = null;
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let queryTimeout;
+    /** @type {boolean} */
+    let searchError = false;
     let temperatureUnit = 'Celsius'; // Default temperature unit
 
-    const mapboxAPIKey = 'REMOVED_MAPBOX_TOKEN';
+    import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
+
+    const mapboxAPIKey = PUBLIC_MAPBOX_ACCESS_TOKEN;
 
     const getSearchResults = () => {
         clearTimeout(queryTimeout);
@@ -24,7 +29,7 @@
                     mapboxSearchResults = data.features;
                     console.log(mapboxSearchResults)
                 } catch {
-                    searchError.value = true
+                    searchError = true
                 }
             } else {
                 mapboxSearchResults = null; // Reset search results if query is empty
@@ -32,7 +37,7 @@
         }, 300);
     };
 
-    const previewCity = (searchResult) => {
+    const previewCity = (/** @type {any} */ searchResult) => {
         const [city, state] = searchResult.place_name.split(",");
         const lat = searchResult.geometry.coordinates[1];
         const lng = searchResult.geometry.coordinates[0];

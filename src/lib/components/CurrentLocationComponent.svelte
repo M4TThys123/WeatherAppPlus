@@ -1,35 +1,32 @@
-<button on:click={findMyLocation}>
-    <i class='bx bx-current-location'></i>
-</button>
-
 <script>
-    // import { onMount } from "svelte";
+    import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
 
-    let mapboxAPIKey = 'REMOVED_MAPBOX_TOKEN';
+    const mapboxAPIKey = PUBLIC_MAPBOX_ACCESS_TOKEN;
 
-    const findMyLocation = async () => {
-        const success = async (position) => {
-            console.log(position);
+    const findMyLocation = () => {
+        /** @param {GeolocationPosition} position */
+        const success = (position) => {
             const lgn = position.coords.longitude;
             const lat = position.coords.latitude;
-            console.log(lgn, lat);
 
-            try {
-                const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lgn},${lat}.json?access_token=${mapboxAPIKey}&types=place`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                console.log(data);
-
-                const [city, state] = data.features[0].place_name.split(",");
-                const redirectUrl = `/weather/${state.trim().replaceAll(" ", "")}/${city.trim().replaceAll(" ", "")}?lat=${lat}&lng=${lgn}&preview=true`;
-                window.location.href = redirectUrl;
-            } catch (error) {
-                console.error('There was a problem with the fetch operation:', error);
-            }
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${lgn},${lat}.json?access_token=${mapboxAPIKey}&types=place`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    const [city, state] = data.features[0].place_name.split(",");
+                    const redirectUrl = `/weather/${state.trim().replaceAll(" ", "")}/${city.trim().replaceAll(" ", "")}?lat=${lat}&lng=${lgn}&preview=true`;
+                    window.location.href = redirectUrl;
+                })
+                .catch((error) => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         };
 
+        /** @param {GeolocationPositionError} err */
         const error = (err) => {
             console.log('error', err);
         };
@@ -38,6 +35,9 @@
     };
 </script>
 
+<button on:click={findMyLocation}>
+    <i class='bx bx-current-location'></i>
+</button>
 
 <style>
     button {
