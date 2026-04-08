@@ -83,7 +83,14 @@ export function transformOpenMeteoData(data) {
 			dt: Math.floor(new Date(data.current.time).getTime() / 1000),
 			temp: data.current.temperature_2m,
 			feels_like: data.current.apparent_temperature,
-			weather: [{ description: currentInfo.description, icon: currentInfo.icon }]
+			weather: [{ description: currentInfo.description, icon: currentInfo.icon }],
+			weather_code: data.current.weather_code,
+			is_day: data.current.is_day ?? (isDay ? 1 : 0),
+			humidity: data.current.relative_humidity_2m,
+			wind_speed: data.current.wind_speed_10m,
+			wind_direction: data.current.wind_direction_10m,
+			uv_index: data.current.uv_index,
+			visibility: data.current.visibility
 		},
 		timezone_offset: data.utc_offset_seconds,
 		currentTime: Date.now(),

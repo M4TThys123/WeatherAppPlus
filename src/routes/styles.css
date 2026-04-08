@@ -2,7 +2,7 @@
 
 @layer base {
 	html {
-		font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Segoe UI', sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
@@ -42,7 +42,6 @@ body {
 	margin: 0;
 	min-width: 320px;
 	min-height: 100vh;
-	background: linear-gradient(0deg, rgba(20,83,154,1) 0%, rgba(72,137,211,1) 100%);
 	color: var(--light);
 }
 

@@ -1,14 +1,17 @@
 <script>
 	import Header from "$lib/components/partials/Header.svelte";
 	import Footer from "$lib/components/partials/Footer.svelte";
+	import WeatherAnimation from "$lib/components/WeatherAnimation.svelte";
 	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
+	import { weatherBg } from '$lib/stores/background.js';
 
 	import './styles.css';
 </script>
 
+<WeatherAnimation type={$weatherBg.animation} />
 
-<div class="app">
+<div class="app" style="background: {$weatherBg.gradient};">
 	<Header></Header>
 
 	{#key $page.url.pathname}
@@ -23,4 +26,9 @@
 </div>
 
 <style>
+	.app {
+		position: relative;
+		z-index: 1;
+		transition: background 1.5s ease;
+	}
 </style>
