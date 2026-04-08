@@ -1,15 +1,20 @@
 <script>
-    // Import Components
     import SearchComponent from "../SearchComponent.svelte";
-
-    import {onMount} from 'svelte';
     import CurrentLocationComponent from "$lib/components/CurrentLocationComponent.svelte";
+    import { page } from '$app/stores';
+    import { addCity } from '$lib/stores/cities.js';
+    import { onMount } from 'svelte';
 
     let searchActive = false;
+    let showSaved = false;
+
+    $: isPreview = $page.url.searchParams.get('preview') === 'true';
+    $: cityName = $page.params.city || '';
+    $: stateName = $page.params.state || '';
 
     function activateSearch() {
         searchActive = true;
-        document.body.classList.add('no-scroll'); // Add the class to disable scrolling
+        document.body.classList.add('no-scroll');
     }
 
     export function deactivateSearch() {
@@ -17,12 +22,24 @@
         document.body.classList.remove('no-scroll');
     }
 
-    // Using function expression for onMount
+    function saveCity() {
+        const lat = parseFloat($page.url.searchParams.get('lat') || '0');
+        const lng = parseFloat($page.url.searchParams.get('lng') || '0');
+        const added = addCity({ city: cityName, state: stateName, lat, lng });
+        if (added) {
+            showSaved = true;
+            setTimeout(() => { showSaved = false; }, 2000);
+            // Remove preview param from URL
+            const url = new URL(window.location.href);
+            url.searchParams.delete('preview');
+            window.history.replaceState({}, '', url.toString());
+        }
+    }
+
     onMount(function () {
-        // Returning a cleanup function
         return function () {
             searchActive = false;
-            document.body.classList.remove('no-scroll'); // Ensure scrolling is enabled when component is destroyed
+            document.body.classList.remove('no-scroll');
         };
     });
 </script>
@@ -39,10 +56,19 @@
         <div class="button-wrapper">
             <CurrentLocationComponent></CurrentLocationComponent>
 
+            {#if isPreview}
+                <button class="save-btn" on:click={saveCity} title="Save city">
+                    {#if showSaved}
+                        <i class='bx bx-check'></i>
+                    {:else}
+                        <i class='bx bx-plus'></i>
+                    {/if}
+                </button>
+            {/if}
+
             <button class="search-btn" on:click={activateSearch}>
                 <i class='bx bx-search'></i>
             </button>
-
         </div>
     </nav>
 </header>
@@ -77,14 +103,22 @@
         color: var(--light);
     }
 
-    .button-wrapper{
+    .button-wrapper {
         display: flex;
         gap: 1em;
     }
 
-    .search-btn {
+    .search-btn, .save-btn {
         font-size: 24px;
         display: flex;
         align-items: center;
+    }
+
+    .save-btn i {
+        transition: transform 0.2s;
+    }
+
+    .save-btn:hover i {
+        transform: scale(1.2);
     }
 </style>
