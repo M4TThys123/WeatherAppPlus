@@ -2,8 +2,10 @@
     import {page} from '$app/stores';
     import {onMount} from "svelte";
 
+    /** @type {any} */
     export let weatherData
 
+    /** @type {string | undefined} */
     let city;
     let isLoading = true;
 
@@ -66,7 +68,7 @@
             </section>
             <div class="hero-icon__container">
                 <div class="hero-icon__wrapper">
-                    <img src={`http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
+                    <img src={`https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
                          alt="Current weather icon"
                          class="hero-icon__image">
                 </div>

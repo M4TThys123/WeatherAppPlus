@@ -1,6 +1,8 @@
 <script>
 
+    /** @type {boolean} */
     export let isMyLocation;
+    /** @type {import('svelte').EventDispatcher<any>} */
     export let dispatch
 
     function handleCloseClick() {

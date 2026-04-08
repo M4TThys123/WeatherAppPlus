@@ -2,10 +2,11 @@
     let checked = true;
     let unit = "Celsius";
 
+    /** @type {() => void} */
     export let toggleTemperatureUnit
 
-    function handleChange(event) {
-        checked = event.target.checked;
+    function handleChange(/** @type {Event} */ event) {
+        checked = /** @type {HTMLInputElement} */ (event.target).checked;
         unit = checked ? "Fahrenheit" : "Celsius";
     }
 </script>

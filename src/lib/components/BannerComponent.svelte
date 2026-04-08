@@ -1,6 +1,7 @@
 <script>
     import {page} from '$app/stores';
-    export let preview
+    /** @type {boolean} */
+    export let preview = false
 </script>
 
 

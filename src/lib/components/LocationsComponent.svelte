@@ -1,5 +1,6 @@
 <script>
 import LocationComponent from "./LocationComponent.svelte";
+/** @type {import('svelte').EventDispatcher<any>} */
 export let dispatch;
 </script>
 
