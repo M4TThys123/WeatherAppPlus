@@ -13,7 +13,6 @@
     let queryTimeout;
     /** @type {boolean} */
     let searchError = false;
-    let temperatureUnit = 'Celsius'; // Default temperature unit
 
     import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
 
@@ -51,11 +50,6 @@
 
     const closeSearch = () => {
         dispatch('close');
-    };
-
-    const toggleTemperatureUnit = () => {
-        temperatureUnit = temperatureUnit === 'Celsius' ? 'Fahrenheit' : 'Celsius';
-        console.log(temperatureUnit)
     };
 
     // Cleanup function to clear the timeout
@@ -128,7 +122,7 @@
         </div>
 
         <div class="navigation-bottom__container">
-            <SwitchUnitButton {toggleTemperatureUnit}></SwitchUnitButton>
+            <SwitchUnitButton></SwitchUnitButton>
 
             <LocationsComponent {dispatch}/>
         </div>

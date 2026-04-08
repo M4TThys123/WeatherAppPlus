@@ -1,26 +1,24 @@
 <script>
-    let checked = true;
-    let unit = "Celsius";
+    import { temperatureUnit } from '$lib/stores/weather.js';
 
-    /** @type {() => void} */
-    export let toggleTemperatureUnit
+    let checked = $temperatureUnit === 'metric';
 
-    function handleChange(/** @type {Event} */ event) {
-        checked = /** @type {HTMLInputElement} */ (event.target).checked;
-        unit = checked ? "Fahrenheit" : "Celsius";
+    function handleToggle() {
+        checked = !checked;
+        temperatureUnit.set(checked ? 'metric' : 'imperial');
     }
 </script>
 
-<div class="switch-container" on:click={toggleTemperatureUnit}>
+<div class="switch-container" on:click={handleToggle} role="button" tabindex="0" on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleToggle(); }}>
     <span>Temperature unit</span>
 
     <div class="temperature-wrapper">
-        <span>°F</span>
+        <span>&#176;F</span>
 
         <input id="switch-shadow" class="switch switch--shadow" type="checkbox" bind:checked>
-        <label for="switch-shadow" on:change={handleChange}></label>
+        <label for="switch-shadow"></label>
 
-        <span>°C</span>
+        <span>&#176;C</span>
     </div>
 </div>
 <style>
@@ -89,8 +87,6 @@
 
     .switch--shadow:checked + label:before {
         background-color: var(--blue);
-        /*background-color: var(--dark-blue);*/
-
     }
 
     .switch--shadow:checked + label:after {

@@ -1,30 +1,23 @@
 <script>
     import {page} from '$app/stores';
     import {onMount} from "svelte";
+    import { temperatureUnit } from '$lib/stores/weather.js';
 
     /** @type {any} */
     export let weatherData
 
     /** @type {string | undefined} */
     let city;
-    let isLoading = true;
+
+    $: unitSymbol = $temperatureUnit === 'imperial' ? 'F' : 'C';
 
     onMount(() => {
-        console.log($page.url)
         const parts = $page.url.pathname.split('/');
         city = parts[parts.length - 1];
-        console.log(city);
-
-        // Simulate loading delay
-        setTimeout(() => {
-            isLoading = false;
-        }, 1000);
     });
 </script>
 
-{#if isLoading}
-    <div>Loading...</div>
-{:else}
+{#if weatherData}
     <section class="hero-section w-full md:w-1/2">
         <div class="hero-wrapper">
             {#if $page.url.pathname === '/'}
@@ -56,12 +49,12 @@
 
             <!--            <p class="hero-temperature">8&deg;C</p>-->
             <p class="hero-temperature">
-                { Math.round(weatherData.current.temp)}&deg;C
+                { Math.round(weatherData.current.temp)}&deg;{unitSymbol}
             </p>
 
             <section class="hero-description">
                 <p class="hero-feeltemp">
-                    Feels like { Math.round(weatherData.current.feels_like)}&deg;C
+                    Feels like { Math.round(weatherData.current.feels_like)}&deg;{unitSymbol}
                 </p>
                 <!--                <p>Few Clouds</p>-->
                 { weatherData.current.weather[0].description}
