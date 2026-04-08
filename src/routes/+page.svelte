@@ -3,11 +3,13 @@ import WeatherOverview from "$lib/components/WeatherOverview.svelte";
 import ForecastComponent from "$lib/components/ForecastComponent.svelte";
 import HourlyWeather from "$lib/components/HourlyWeather.svelte";
 import BannerComponent from "$lib/components/BannerComponent.svelte";
+import CityCard from "$lib/components/CityCard.svelte";
 import WeatherOverviewSkeleton from "$lib/components/skeletons/WeatherOverviewSkeleton.svelte";
 import HourlyWeatherSkeleton from "$lib/components/skeletons/HourlyWeatherSkeleton.svelte";
 import ForecastSkeleton from "$lib/components/skeletons/ForecastSkeleton.svelte";
 import { transformOpenMeteoData } from '$lib/utils/weather.js';
 import { temperatureUnit } from '$lib/stores/weather.js';
+import { savedCities } from '$lib/stores/cities.js';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
 
@@ -50,7 +52,7 @@ temperatureUnit.subscribe(async (unit) => {
 </script>
 
 <svelte:head>
-	<title>Obdam | WeatherAppPlus</title>
+	<title>Home | WeatherAppPlus</title>
 </svelte:head>
 
 <BannerComponent preview={false}></BannerComponent>
@@ -75,6 +77,17 @@ temperatureUnit.subscribe(async (unit) => {
 		<HourlyWeather {weatherData}></HourlyWeather>
 		<ForecastComponent {weatherData}></ForecastComponent>
 	</div>
+{/if}
+
+{#if $savedCities.length > 0}
+	<section class="saved-cities" transition:fade>
+		<h2 class="saved-title">Saved Locations</h2>
+		<div class="saved-list">
+			{#each $savedCities as city (city.id)}
+				<CityCard {city} />
+			{/each}
+		</div>
+	</section>
 {/if}
 
 <style>
@@ -102,5 +115,23 @@ temperatureUnit.subscribe(async (unit) => {
 
 	.error-message button:hover {
 		opacity: 0.8;
+	}
+
+	.saved-cities {
+		width: 100%;
+		padding: 1em 0 3em;
+	}
+
+	.saved-title {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 1em;
+		color: var(--light);
+	}
+
+	.saved-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75em;
 	}
 </style>
