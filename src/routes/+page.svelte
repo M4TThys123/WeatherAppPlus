@@ -3,61 +3,37 @@ import WeatherOverview from "$lib/components/WeatherOverview.svelte";
 import ForecastComponent from "$lib/components/ForecastComponent.svelte";
 import HourlyWeather from "$lib/components/HourlyWeather.svelte";
 import BannerComponent from "$lib/components/BannerComponent.svelte";
+import { transformOpenMeteoData } from '$lib/utils/weather.js';
 
 import { onMount } from 'svelte';
 
-// export let units
-// console.log(units)
-
-let units = "metric"
-
-
+/** @type {any} */
 let weatherData;
 let lat = 52.676145;
 let lng = 4.90843;
-const city = "Obdam"
 
-
+async function getWeatherData(/** @type {number} */ lat, /** @type {number} */ lng) {
+	try {
+		const response = await fetch(
+			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7`
+		);
+		const data = await response.json();
+		return transformOpenMeteoData(data);
+	} catch (err) {
+		console.log(err);
+	}
+}
 
 onMount(async () => {
-	console.log(city)
-	console.log(weatherData = await getWeatherData(lat, lng, units));
-
+	weatherData = await getWeatherData(lat, lng);
 });
-</script>
-
-<script context="module">
-	export async function getWeatherData(lat, lng, units) {
-		try {
-			const response = await fetch(
-					`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude={part}&appid=REMOVED_API_KEY&units=${units}`
-
-			);
-			const weatherData = await response.json();
-
-			// calculate current date & time
-			const localOffset = new Date().getTimezoneOffset() * 60000;
-			const utc = weatherData.current.dt * 1000 + localOffset;
-			weatherData.currentTime = utc + 1000 * weatherData.timezone_offset;
-
-			// calculate hourly weather offset
-			weatherData.hourly.forEach((hour) => {
-				const utc = hour.dt * 1000 + localOffset;
-				hour.currentTime = utc + 1000 * weatherData.timezone_offset;
-			});
-
-			return weatherData;
-		} catch (err) {
-			console.log(err);
-		}
-	}
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-<BannerComponent></BannerComponent>
+<BannerComponent preview={false}></BannerComponent>
 
 <WeatherOverview {weatherData}></WeatherOverview>
 
