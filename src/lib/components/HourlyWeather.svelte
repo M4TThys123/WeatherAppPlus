@@ -1,6 +1,6 @@
 <script>
+    /** @type {any} */
     export let weatherData
-    console.log(weatherData)
 </script>
 
 <section class="hourly-weather-section">
@@ -16,7 +16,7 @@
                         </p>
                         <img
                                 class="hourly-weather-image"
-                                src={`http://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`}
+                                src={`https://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`}
                                 alt=""
                         />
                         <p class="hourly-weather-temp">
