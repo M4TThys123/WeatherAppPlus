@@ -44,15 +44,6 @@
         text-align: center;
     }
 
-    .image-container {
-        width: 25px;
-        height: 25px;
-    }
-
-    .logo{
-        width: 100%;
-        height: 100%;
-    }
 
 </style>
 

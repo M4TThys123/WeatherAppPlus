@@ -18,7 +18,7 @@
                 })
                 .then((data) => {
                     const [city, state] = data.features[0].place_name.split(",");
-                    const redirectUrl = `/weather/${state.trim().replaceAll(" ", "")}/${city.trim().replaceAll(" ", "")}?lat=${lat}&lng=${lgn}&preview=true`;
+                    const redirectUrl = `/weather/${encodeURIComponent(state.trim())}/${encodeURIComponent(city.trim())}?lat=${lat}&lng=${lgn}&preview=true`;
                     window.location.href = redirectUrl;
                 })
                 .catch((error) => {
@@ -28,7 +28,7 @@
 
         /** @param {GeolocationPositionError} err */
         const error = (err) => {
-            console.log('error', err);
+            console.error('Geolocation error:', err);
         };
 
         navigator.geolocation.getCurrentPosition(success, error);

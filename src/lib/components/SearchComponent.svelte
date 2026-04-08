@@ -1,10 +1,9 @@
 <script>
-    // Import Components
     import LocationsComponent from "./LocationsComponent.svelte";
-
     import {onMount} from 'svelte';
     import {createEventDispatcher} from 'svelte';
     import SwitchUnitButton from "./SwitchUnitButton.svelte";
+    import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
 
     let searchQuery = '';
     /** @type {any[] | null} */
@@ -13,26 +12,27 @@
     let queryTimeout;
     /** @type {boolean} */
     let searchError = false;
-
-    import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
+    let searching = false;
 
     const mapboxAPIKey = PUBLIC_MAPBOX_ACCESS_TOKEN;
 
     const getSearchResults = () => {
         clearTimeout(queryTimeout);
+        if (searchQuery === '') {
+            mapboxSearchResults = null;
+            searching = false;
+            return;
+        }
+        searching = true;
         queryTimeout = setTimeout(async () => {
-            if (searchQuery !== '') {
-                try {
-                    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchQuery)}.json?access_token=${mapboxAPIKey}&types=place`);
-                    const data = await response.json();
-                    mapboxSearchResults = data.features;
-                    console.log(mapboxSearchResults)
-                } catch {
-                    searchError = true
-                }
-            } else {
-                mapboxSearchResults = null; // Reset search results if query is empty
+            try {
+                const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(searchQuery)}.json?access_token=${mapboxAPIKey}&types=place`);
+                const data = await response.json();
+                mapboxSearchResults = data.features;
+            } catch {
+                searchError = true;
             }
+            searching = false;
         }, 300);
     };
 
@@ -41,9 +41,8 @@
         const lat = searchResult.geometry.coordinates[1];
         const lng = searchResult.geometry.coordinates[0];
 
-        // Redirect to the city view with parameters
-        window.location.href = `/weather/${state.trim().replaceAll(" ", "")}/${city.trim().replaceAll(" ", "")}?lat=${lat}&lng=${lng}&preview=true`;
-        closeSearch()
+        window.location.href = `/weather/${encodeURIComponent(state.trim())}/${encodeURIComponent(city.trim())}?lat=${lat}&lng=${lng}&preview=true`;
+        closeSearch();
     };
 
     const dispatch = createEventDispatcher();
@@ -52,7 +51,6 @@
         dispatch('close');
     };
 
-    // Cleanup function to clear the timeout
     onMount(() => {
         return () => {
             clearTimeout(queryTimeout);
@@ -73,7 +71,7 @@
                         bind:value={searchQuery}
                         on:input={getSearchResults}
                         placeholder="Search for a city"
-                        class="search-input backround bg-transparent"
+                        class="search-input bg-transparent"
                 />
 
                 <button class="clear-search__btn" on:click={() => {
@@ -82,6 +80,7 @@
                     } else {
                         searchQuery = '';
                         mapboxSearchResults = null;
+                        searching = false;
                     }
                 }}>
                     <i class='bx bx-x'></i>
@@ -89,10 +88,16 @@
             </div>
 
             <div class="search-result__wrapper">
+                {#if searching}
+                    <div class="search-loading">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                {/if}
+
                 {#if mapboxSearchResults}
-                    <ul
-                            class="search-result__list py-2 px-1"
-                    >
+                    <ul class="search-result__list py-2 px-1">
                         {#if searchError}
                             <p>Sorry, something went wrong, please try again.</p>
                         {/if}
@@ -102,19 +107,18 @@
                         {/if}
 
                         {#each mapboxSearchResults as searchResult (searchResult.id)}
-                            <li
-                                    class="search-result__item py-2 cursor-pointer "
+                            <button
+                                    class="search-result__item py-2 cursor-pointer"
                                     on:click={() => previewCity(searchResult)}
                             >
                                 <div class="search-text__wrapper">
                                     <i class='bx bx-current-location'></i>
-
                                     {searchResult.place_name}
                                 </div>
                                 <div class="search-icon__wrapper">
                                     <i class='bx bx-search'></i>
                                 </div>
-                            </li>
+                            </button>
                         {/each}
                     </ul>
                 {/if}
@@ -123,7 +127,6 @@
 
         <div class="navigation-bottom__container">
             <SwitchUnitButton></SwitchUnitButton>
-
             <LocationsComponent {dispatch}/>
         </div>
     </div>
@@ -140,22 +143,15 @@
         left: 0;
     }
 
-    .navigation-container{
+    .navigation-container {
         padding: .5em 1rem 2em;
         margin: 0 auto;
-
         width: 100%;
         max-width: 1280px;
         height: 100%;
-
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
-    }
-
-    .search-container {
-
     }
 
     .search-result__wrapper {
@@ -166,11 +162,9 @@
         position: relative;
     }
 
-
     .close-search__btn, .clear-search__btn {
         position: absolute;
         top: 11px;
-
     }
 
     .close-search__btn i {
@@ -189,11 +183,7 @@
 
     input {
         width: 100%;
-
-        /*margin-top: 7px;*/
-        padding-left: 4px;
-        padding: 10px 30px; /* Adjust the padding as needed */
-
+        padding: 10px 30px;
         background: var(--search-secondary-background);
         border-top: none;
         border-right: none;
@@ -201,12 +191,9 @@
         border-bottom-width: 1px;
         border-color: var(--light);
         outline: none;
-
         color: var(--light);
         font-size: 100%;
     }
-
-
 
     input::placeholder {
         color: #9CA3AF;
@@ -228,9 +215,39 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
+        text-align: left;
+        padding: 0.5em 0;
     }
 
-    .navigation-bottom__container{
+    .search-result__item:hover {
+        opacity: 0.7;
+    }
+
+    .search-loading {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        padding: 1em;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--light-grey);
+        animation: pulse-dot 1s infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.15s; }
+    .dot:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes pulse-dot {
+        0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+        40% { opacity: 1; transform: scale(1); }
+    }
+
+    .navigation-bottom__container {
         display: flex;
         flex-direction: column;
         gap: .5em;
