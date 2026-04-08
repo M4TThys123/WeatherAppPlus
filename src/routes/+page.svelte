@@ -79,16 +79,22 @@ temperatureUnit.subscribe(async (unit) => {
 	</div>
 {/if}
 
-{#if $savedCities.length > 0}
-	<section class="saved-cities" transition:fade>
-		<h2 class="saved-title">Saved Locations</h2>
+<section class="saved-cities">
+	<h2 class="saved-title">Saved Locations</h2>
+	{#if $savedCities.length > 0}
 		<div class="saved-list">
 			{#each $savedCities as city (city.id)}
 				<CityCard {city} />
 			{/each}
 		</div>
-	</section>
-{/if}
+	{:else}
+		<div class="empty-state">
+			<i class='bx bx-map-pin'></i>
+			<p>No saved cities yet</p>
+			<p class="empty-hint">Search for a city and tap + to save it here.</p>
+		</div>
+	{/if}
+</section>
 
 <style>
 	.error-message {
@@ -133,5 +139,32 @@ temperatureUnit.subscribe(async (unit) => {
 		display: flex;
 		flex-direction: column;
 		gap: 0.75em;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 2em 1em;
+		background: var(--dark-blue);
+		border-radius: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.25em;
+	}
+
+	.empty-state i {
+		font-size: 32px;
+		margin-bottom: 0.25em;
+	}
+
+	.empty-state p {
+		font-size: 15px;
+		font-weight: 500;
+	}
+
+	.empty-hint {
+		font-size: 13px !important;
+		font-weight: 400 !important;
+		color: var(--light-grey);
 	}
 </style>

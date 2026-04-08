@@ -10,6 +10,7 @@
     import { temperatureUnit } from '$lib/stores/weather.js';
     import { savedCities, removeCity } from '$lib/stores/cities.js';
     import { page } from '$app/stores';
+    import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
 
@@ -30,7 +31,7 @@
     function handleRemove() {
         if (savedCity) {
             removeCity(savedCity.id);
-            window.location.href = '/';
+            goto('/', { replaceState: true });
         }
     }
 
