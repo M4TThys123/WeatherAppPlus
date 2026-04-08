@@ -1,10 +1,12 @@
 <script>
+    /** @type {any} */
     export let weatherData;
 
+    /** @type {any[]} */
     let forecastData = [];
 
-    // Extract the next 7 days of weather data from the weatherData prop
-    if (weatherData && weatherData.daily) {
+    // Reactief: herbereken wanneer weatherData verandert
+    $: if (weatherData && weatherData.daily) {
         forecastData = weatherData.daily.slice(0, 7);
     }
 </script>
@@ -16,12 +18,12 @@
             7-Day Forecast
         </div>
 
-        {#if true}
+        {#if forecastData.length > 0}
             {#each forecastData as day (day.dt)}
                 <div class="forecast-row">
                     <div class="forecast-day">{new Date(day.dt * 1000).toLocaleDateString("en-us", { weekday: "short" })}</div>
                     <div class="forecast-icon__wrapper">
-                        <img class="hourly-weather-image" src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`} alt="" />
+                        <img class="hourly-weather-image" src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`} alt="" />
                     </div>
                     <div class="forecast-temp">H: {Math.round(day.temp.max)}&deg; / L: {Math.round(day.temp.min)}&deg;</div>
                 </div>
