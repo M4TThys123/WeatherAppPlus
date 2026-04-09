@@ -16,8 +16,11 @@
 <style>
     .skeleton-forecast {
         width: 100%;
-        background: var(--dark-blue);
-        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
         padding: 1em 1.5em;
         margin-bottom: 2.5rem;
     }

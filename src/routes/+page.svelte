@@ -7,8 +7,11 @@ import CityCard from "$lib/components/CityCard.svelte";
 import WeatherOverviewSkeleton from "$lib/components/skeletons/WeatherOverviewSkeleton.svelte";
 import HourlyWeatherSkeleton from "$lib/components/skeletons/HourlyWeatherSkeleton.svelte";
 import ForecastSkeleton from "$lib/components/skeletons/ForecastSkeleton.svelte";
+import WeatherDetails from "$lib/components/WeatherDetails.svelte";
 import { transformOpenMeteoData } from '$lib/utils/weather.js';
+import { getWeatherBackground } from '$lib/utils/weatherBackground.js';
 import { temperatureUnit } from '$lib/stores/weather.js';
+import { weatherBg } from '$lib/stores/background.js';
 import { savedCities } from '$lib/stores/cities.js';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
@@ -26,7 +29,7 @@ async function getWeatherData(/** @type {number} */ lat, /** @type {number} */ l
 		error = null;
 		const units = $temperatureUnit === 'imperial' ? '&temperature_unit=fahrenheit' : '';
 		const response = await fetch(
-			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7${units}`
+			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,weather_code,is_day,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index,visibility&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7${units}`
 		);
 		if (!response.ok) throw new Error('Weerdata kon niet worden opgehaald');
 		const data = await response.json();
@@ -39,6 +42,9 @@ async function getWeatherData(/** @type {number} */ lat, /** @type {number} */ l
 
 onMount(async () => {
 	weatherData = await getWeatherData(lat, lng);
+	if (weatherData) {
+		weatherBg.set(getWeatherBackground(weatherData.current.weather_code, weatherData.current.is_day === 1));
+	}
 	loading = false;
 });
 
@@ -76,6 +82,7 @@ temperatureUnit.subscribe(async (unit) => {
 		<WeatherOverview {weatherData}></WeatherOverview>
 		<HourlyWeather {weatherData}></HourlyWeather>
 		<ForecastComponent {weatherData}></ForecastComponent>
+		<WeatherDetails {weatherData} />
 	</div>
 {/if}
 
@@ -144,8 +151,11 @@ temperatureUnit.subscribe(async (unit) => {
 	.empty-state {
 		text-align: center;
 		padding: 2em 1em;
-		background: var(--dark-blue);
-		border-radius: 20px;
+		background: rgba(255, 255, 255, 0.08);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		border-radius: 16px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

@@ -95,8 +95,9 @@
 
     .hero-temperature {
         margin-top: -2px;
-        font-size: 100px;
-        font-weight: lighter;
+        font-size: 96px;
+        font-weight: 200;
+        letter-spacing: -2px;
         margin-bottom: 2px;
     }
 

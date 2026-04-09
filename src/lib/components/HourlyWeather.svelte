@@ -47,6 +47,11 @@
 
     .hourly-weather-title {
         margin-bottom: 1rem;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+        opacity: 0.6;
     }
 
     .hourly-weather-items {

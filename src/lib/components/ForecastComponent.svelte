@@ -41,17 +41,22 @@
 
     .forecast-section {
         width: 100%;
-        background: var(--dark-blue);
-        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
         padding: 1em 1.5em;
     }
 
     .forecast-heading {
         position: relative;
         text-transform: uppercase;
-        font-weight: bold;
-        font-size: 16px;
+        font-weight: 500;
+        font-size: 11px;
+        letter-spacing: 0.08em;
         color: var(--light-grey);
+        opacity: 0.6;
         margin-bottom: 6px;
     }
 

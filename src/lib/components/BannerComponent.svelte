@@ -39,8 +39,11 @@
         display: flex;
         gap: 1em;
         font-size: 14px;
-        background: rgba(0, 0, 0, .5);
-        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
         text-align: center;
     }
 
