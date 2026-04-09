@@ -1,6 +1,7 @@
 <script>
 import LocationComponent from "./LocationComponent.svelte";
 import { savedCities } from '$lib/stores/cities.js';
+import { t } from '$lib/stores/i18n.js';
 
 /** @type {import('svelte').EventDispatcher<any>} */
 export let dispatch;
@@ -13,7 +14,7 @@ const defaultLocation = {
 </script>
 
 <section class="locations-section w-full md:w-1/2">
-    <h2 class="mb-3">My Locations</h2>
+    <h2 class="mb-3">{$t('locations.title')}</h2>
     <div class="locations-wrapper">
         <LocationComponent location={defaultLocation} isMyLocation={true} {dispatch} />
 
@@ -22,7 +23,7 @@ const defaultLocation = {
         {/each}
 
         {#if $savedCities.length === 0}
-            <p class="empty-text">Search for a city to save it here.</p>
+            <p class="empty-text">{$t('locations.emptyHint')}</p>
         {/if}
     </div>
 </section>

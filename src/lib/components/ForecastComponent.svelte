@@ -1,4 +1,9 @@
 <script>
+    import { language, t } from '$lib/stores/i18n.js';
+    import { translations } from '$lib/i18n/translations.js';
+    import WeatherIcon from './WeatherIcon.svelte';
+    import { getWeatherIcon } from '$lib/utils/weatherIcon.js';
+
     /** @type {any} */
     export let weatherData;
 
@@ -8,25 +13,30 @@
     $: if (weatherData && weatherData.daily) {
         forecastData = weatherData.daily.slice(0, 7);
     }
+
+    /** @param {number} dt */
+    function dayName(dt) {
+        const dayIndex = new Date(dt * 1000).getDay();
+        return translations[$language]?.days?.short?.[dayIndex] || new Date(dt * 1000).toLocaleDateString('en-us', { weekday: 'short' });
+    }
 </script>
 
 <section class="forecast-section">
     <div class="section-label">
         <i class='bx bxs-calendar'></i>
-        7-Day Forecast
+        {$t('weather.forecast')}
     </div>
 
     {#if forecastData.length > 0}
         {#each forecastData as day (day.dt)}
+            {@const iconInfo = getWeatherIcon(day.weather_code, true)}
             <div class="forecast-row">
-                <div class="forecast-day">
-                    {new Date(day.dt * 1000).toLocaleDateString("en-us", { weekday: "short" })}
-                </div>
+                <div class="forecast-day">{dayName(day.dt)}</div>
                 <div class="forecast-icon">
-                    <img src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`} alt="" />
+                    <WeatherIcon icon={iconInfo.id} size={32} />
                 </div>
                 <div class="forecast-temp">
-                    H: {Math.round(day.temp.max)}&deg; / L: {Math.round(day.temp.min)}&deg;
+                    {$t('weather.high')}: {Math.round(day.temp.max)}&deg; / {$t('weather.low')}: {Math.round(day.temp.min)}&deg;
                 </div>
             </div>
         {/each}
@@ -79,16 +89,9 @@
     }
 
     .forecast-icon {
-        width: 40px;
-        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .forecast-icon img {
-        width: 40px;
-        height: 40px;
     }
 
     .forecast-temp {

@@ -4,6 +4,7 @@
     import {createEventDispatcher} from 'svelte';
     import SwitchUnitButton from "./SwitchUnitButton.svelte";
     import { PUBLIC_MAPBOX_ACCESS_TOKEN } from '$env/static/public';
+    import { t } from '$lib/stores/i18n.js';
 
     let searchQuery = '';
     /** @type {any[] | null} */
@@ -70,7 +71,7 @@
                         type="text"
                         bind:value={searchQuery}
                         on:input={getSearchResults}
-                        placeholder="Search for a city"
+                        placeholder={$t('search.placeholder')}
                         class="search-input bg-transparent"
                 />
 
@@ -99,11 +100,11 @@
                 {#if mapboxSearchResults}
                     <ul class="search-result__list py-2 px-1">
                         {#if searchError}
-                            <p>Sorry, something went wrong, please try again.</p>
+                            <p>{$t('search.error')}</p>
                         {/if}
 
                         {#if !searchError && mapboxSearchResults.length === 0}
-                            <p>No results match your query, try a different term.</p>
+                            <p>{$t('search.noResults')}</p>
                         {/if}
 
                         {#each mapboxSearchResults as searchResult (searchResult.id)}

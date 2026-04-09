@@ -4,6 +4,7 @@
     import HourlyWeather from "$lib/components/HourlyWeather.svelte";
     import ForecastComponent from "$lib/components/ForecastComponent.svelte";
     import WeatherDetails from "$lib/components/WeatherDetails.svelte";
+    import TemperatureChart from "$lib/components/TemperatureChart.svelte";
     import WeatherOverviewSkeleton from "$lib/components/skeletons/WeatherOverviewSkeleton.svelte";
     import HourlyWeatherSkeleton from "$lib/components/skeletons/HourlyWeatherSkeleton.svelte";
     import ForecastSkeleton from "$lib/components/skeletons/ForecastSkeleton.svelte";
@@ -12,6 +13,7 @@
     import { temperatureUnit } from '$lib/stores/weather.js';
     import { weatherBg } from '$lib/stores/background.js';
     import { savedCities, removeCity } from '$lib/stores/cities.js';
+    import { t } from '$lib/stores/i18n.js';
     import { page } from '$app/stores';
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
@@ -87,7 +89,7 @@
         <i class='bx bx-error-circle'></i>
         <p>{error}</p>
         <button on:click={async () => { loading = true; weatherData = await getWeatherData(lat, lng); loading = false; }}>
-            Opnieuw proberen
+            {$t('actions.retry')}
         </button>
     </div>
 {:else if loading}
@@ -100,13 +102,14 @@
     <div transition:fade={{ duration: 300 }}>
         <WeatherOverview {weatherData}></WeatherOverview>
         <HourlyWeather {weatherData}></HourlyWeather>
+        <TemperatureChart {weatherData} />
         <ForecastComponent {weatherData}></ForecastComponent>
         <WeatherDetails {weatherData} />
 
         {#if savedCity}
             <button class="remove-btn" on:click={handleRemove}>
                 <i class='bx bx-trash'></i>
-                Remove City
+                {$t('locations.remove')}
             </button>
         {/if}
     </div>

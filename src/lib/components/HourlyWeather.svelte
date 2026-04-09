@@ -1,23 +1,24 @@
 <script>
+    import { t } from '$lib/stores/i18n.js';
+    import WeatherIcon from './WeatherIcon.svelte';
+    import { getWeatherIcon } from '$lib/utils/weatherIcon.js';
+
     /** @type {any} */
     export let weatherData
 </script>
 
 <section class="hourly-section">
     {#if weatherData}
-        <h2 class="section-label">Hourly Forecast</h2>
+        <h2 class="section-label">{$t('weather.hourly')}</h2>
 
         <div class="hourly-scroll">
             {#each weatherData.hourly as hourData (hourData.dt)}
+                {@const iconInfo = getWeatherIcon(hourData.weather_code, hourData.is_day === 1)}
                 <div class="hour-item">
                     <p class="hour-time">
                         {new Date(hourData.currentTime).toLocaleTimeString("en-us", {hour: "numeric"})}
                     </p>
-                    <img
-                        class="hour-icon"
-                        src={`https://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`}
-                        alt=""
-                    />
+                    <WeatherIcon icon={iconInfo.id} size={36} />
                     <p class="hour-temp">
                         {Math.round(hourData.temp)}&deg;
                     </p>
@@ -68,11 +69,6 @@
         white-space: nowrap;
         font-size: 14px;
         font-weight: 500;
-    }
-
-    .hour-icon {
-        width: 44px;
-        height: 44px;
     }
 
     .hour-temp {

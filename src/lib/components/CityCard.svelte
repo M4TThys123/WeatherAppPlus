@@ -75,12 +75,17 @@
         border: 1px solid var(--glass-border);
         border-radius: 16px;
         cursor: pointer;
-        transition: opacity 0.2s;
+        transition: all 0.2s ease;
         text-align: left;
     }
 
     .city-card:hover {
-        opacity: 0.85;
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    .city-card:active {
+        transform: scale(0.98);
     }
 
     .card-left {

@@ -8,11 +8,13 @@ import WeatherOverviewSkeleton from "$lib/components/skeletons/WeatherOverviewSk
 import HourlyWeatherSkeleton from "$lib/components/skeletons/HourlyWeatherSkeleton.svelte";
 import ForecastSkeleton from "$lib/components/skeletons/ForecastSkeleton.svelte";
 import WeatherDetails from "$lib/components/WeatherDetails.svelte";
+import TemperatureChart from "$lib/components/TemperatureChart.svelte";
 import { transformOpenMeteoData } from '$lib/utils/weather.js';
 import { getWeatherBackground } from '$lib/utils/weatherBackground.js';
 import { temperatureUnit } from '$lib/stores/weather.js';
 import { weatherBg } from '$lib/stores/background.js';
 import { savedCities } from '$lib/stores/cities.js';
+import { t } from '$lib/stores/i18n.js';
 import { onMount } from 'svelte';
 import { fade } from 'svelte/transition';
 
@@ -68,7 +70,7 @@ temperatureUnit.subscribe(async (unit) => {
 		<i class='bx bx-error-circle'></i>
 		<p>{error}</p>
 		<button on:click={async () => { loading = true; weatherData = await getWeatherData(lat, lng); loading = false; }}>
-			Opnieuw proberen
+			{$t('actions.retry')}
 		</button>
 	</div>
 {:else if loading}
@@ -81,13 +83,14 @@ temperatureUnit.subscribe(async (unit) => {
 	<div transition:fade={{ duration: 300 }}>
 		<WeatherOverview {weatherData}></WeatherOverview>
 		<HourlyWeather {weatherData}></HourlyWeather>
+		<TemperatureChart {weatherData} />
 		<ForecastComponent {weatherData}></ForecastComponent>
 		<WeatherDetails {weatherData} />
 	</div>
 {/if}
 
 <section class="saved-cities">
-	<h2 class="saved-title">Saved Locations</h2>
+	<h2 class="saved-title">{$t('locations.title')}</h2>
 	{#if $savedCities.length > 0}
 		<div class="saved-list">
 			{#each $savedCities as city (city.id)}
@@ -97,8 +100,8 @@ temperatureUnit.subscribe(async (unit) => {
 	{:else}
 		<div class="empty-state">
 			<i class='bx bx-map-pin'></i>
-			<p>No saved cities yet</p>
-			<p class="empty-hint">Search for a city and tap + to save it here.</p>
+			<p>{$t('locations.empty')}</p>
+			<p class="empty-hint">{$t('locations.emptyHint')}</p>
 		</div>
 	{/if}
 </section>

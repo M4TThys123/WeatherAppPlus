@@ -1,19 +1,14 @@
 <script>
     import {page} from '$app/stores';
+    import { t } from '$lib/stores/i18n.js';
     /** @type {boolean} */
     export let preview = false
 </script>
 
-
 {#if $page.url.pathname === '/'}
     <div class="banner-container">
-        <section class="banner-section round blur">
-<!--            <div class="image-container">-->
-<!--                <img class="logo" src="https://avatars.githubusercontent.com/u/70703948?v=4"-->
-<!--                     alt="Image of Matthijs Blauw"/>-->
-<!--            </div>-->
-            <p class="banner-text">You are currently previewing Matthijs' city, click the search icon to start tracking
-                a city.</p>
+        <section class="banner-section round">
+            <p class="banner-text">{$t('banner.home')}</p>
         </section>
     </div>
 {/if}
@@ -21,12 +16,10 @@
 {#if preview}
     <section class="banner-section">
         <div class="banner-container text-center">
-            <p>You are currently previewing this city, click the "+" icon to start tracking a
-                city.</p>
+            <p>{$t('banner.preview')}</p>
         </div>
     </section>
 {/if}
-
 
 <style>
     .banner-container {
@@ -47,8 +40,4 @@
         text-align: center;
         margin-bottom: 0.5em;
     }
-
-
 </style>
-
-

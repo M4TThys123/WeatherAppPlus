@@ -1,5 +1,6 @@
 <script>
     import { temperatureUnit } from '$lib/stores/weather.js';
+    import { t } from '$lib/stores/i18n.js';
 
     /** @type {any} */
     export let weatherData;
@@ -35,17 +36,17 @@
     <section class="details-section">
         <div class="details-grid">
             <div class="detail-tile">
-                <span class="detail-label">Feels Like</span>
+                <span class="detail-label">{$t('weather.feelsLike')}</span>
                 <span class="detail-value">{Math.round(weatherData.current.feels_like)}&deg;{unitSymbol}</span>
             </div>
 
             <div class="detail-tile">
-                <span class="detail-label">Humidity</span>
+                <span class="detail-label">{$t('weather.humidity')}</span>
                 <span class="detail-value">{weatherData.current.humidity ?? '--'}%</span>
             </div>
 
             <div class="detail-tile">
-                <span class="detail-label">Wind</span>
+                <span class="detail-label">{$t('weather.wind')}</span>
                 <span class="detail-value">
                     {Math.round(weatherData.current.wind_speed ?? 0)} km/h
                 </span>
@@ -53,7 +54,7 @@
             </div>
 
             <div class="detail-tile">
-                <span class="detail-label">UV Index</span>
+                <span class="detail-label">{$t('weather.uvIndex')}</span>
                 <span class="detail-value" style="color: {uvColor(weatherData.current.uv_index ?? 0)}">
                     {Math.round(weatherData.current.uv_index ?? 0)}
                 </span>
@@ -61,14 +62,14 @@
             </div>
 
             <div class="detail-tile">
-                <span class="detail-label">Visibility</span>
+                <span class="detail-label">{$t('weather.visibility')}</span>
                 <span class="detail-value">
                     {weatherData.current.visibility != null ? Math.round(weatherData.current.visibility / 1000) : '--'} km
                 </span>
             </div>
 
             <div class="detail-tile">
-                <span class="detail-label">Pressure</span>
+                <span class="detail-label">{$t('weather.pressure')}</span>
                 <span class="detail-value">--</span>
                 <span class="detail-sub">hPa</span>
             </div>

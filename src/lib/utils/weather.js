@@ -60,6 +60,8 @@ export function transformOpenMeteoData(data) {
 			dt: Math.floor(date.getTime() / 1000),
 			temp: data.hourly.temperature_2m[i],
 			currentTime: date.getTime(),
+			weather_code: data.hourly.weather_code[i],
+			is_day: hourIsDay ? 1 : 0,
 			weather: [{ description: info.description, icon: info.icon }]
 		};
 	});
@@ -74,6 +76,7 @@ export function transformOpenMeteoData(data) {
 				max: data.daily.temperature_2m_max[i],
 				min: data.daily.temperature_2m_min[i]
 			},
+			weather_code: data.daily.weather_code[i],
 			weather: [{ description: info.description, icon: info.icon }]
 		};
 	});

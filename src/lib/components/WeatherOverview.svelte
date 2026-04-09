@@ -2,6 +2,10 @@
     import {page} from '$app/stores';
     import {onMount} from "svelte";
     import { temperatureUnit } from '$lib/stores/weather.js';
+    import { language, t } from '$lib/stores/i18n.js';
+    import { weatherDescriptions } from '$lib/i18n/weatherDescriptions.js';
+    import WeatherIcon from './WeatherIcon.svelte';
+    import { getWeatherIcon } from '$lib/utils/weatherIcon.js';
 
     /** @type {any} */
     export let weatherData
@@ -10,6 +14,10 @@
     let city;
 
     $: unitSymbol = $temperatureUnit === 'imperial' ? 'F' : 'C';
+    $: description = weatherData
+        ? (weatherDescriptions[$language]?.[weatherData.current.weather_code] || weatherData.current.weather[0].description)
+        : '';
+    $: iconInfo = weatherData ? getWeatherIcon(weatherData.current.weather_code, weatherData.current.is_day === 1) : null;
 
     onMount(() => {
         const parts = $page.url.pathname.split('/');
@@ -21,23 +29,19 @@
     <section class="hero-section">
         <div class="hero-wrapper">
             {#if $page.url.pathname === '/'}
-                <h2 class="hero-title">My Location</h2>
+                <h2 class="hero-title">{$t('locations.myLocation')}</h2>
                 <p class="hero-subtitle">Obdam</p>
             {:else}
                 <h2 class="hero-title">{city}</h2>
                 <p class="hero-subtitle">
-                    {
-                        new Date(weatherData.currentTime).toLocaleDateString(
-                            "en-us",
-                            { weekday: "short", day: "2-digit", month: "short" }
-                        )
-                    }
-                    {
-                        new Date(weatherData.currentTime).toLocaleTimeString(
-                            "en-us",
-                            { timeStyle: "short" }
-                        )
-                    }
+                    {new Date(weatherData.currentTime).toLocaleDateString(
+                        $language === 'nl' ? 'nl-NL' : 'en-US',
+                        { weekday: "short", day: "2-digit", month: "short" }
+                    )}
+                    {new Date(weatherData.currentTime).toLocaleTimeString(
+                        $language === 'nl' ? 'nl-NL' : 'en-US',
+                        { timeStyle: "short" }
+                    )}
                 </p>
             {/if}
 
@@ -47,16 +51,16 @@
 
             <section class="hero-description">
                 <p class="hero-feeltemp">
-                    Feels like {Math.round(weatherData.current.feels_like)}&deg;{unitSymbol}
+                    {$t('weather.feelsLike')} {Math.round(weatherData.current.feels_like)}&deg;{unitSymbol}
                 </p>
-                {weatherData.current.weather[0].description}
+                {description}
             </section>
 
-            <div class="hero-icon__container">
-                <img src={`https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
-                     alt="Current weather icon"
-                     class="hero-icon__image">
-            </div>
+            {#if iconInfo}
+                <div class="hero-icon__container">
+                    <WeatherIcon icon={iconInfo.id} size={120} />
+                </div>
+            {/if}
         </div>
     </section>
 {/if}
@@ -106,21 +110,11 @@
     .hero-icon__container {
         display: flex;
         justify-content: center;
-        margin-top: -10px;
-    }
-
-    .hero-icon__image {
-        width: 120px;
-        height: 120px;
+        margin-top: 4px;
     }
 
     @media (min-width: 768px) {
-        .hero-title {
-            font-size: 34px;
-        }
-
-        .hero-temperature {
-            font-size: 96px;
-        }
+        .hero-title { font-size: 34px; }
+        .hero-temperature { font-size: 96px; }
     }
 </style>
