@@ -13,15 +13,15 @@
 
     onMount(() => {
         const parts = $page.url.pathname.split('/');
-        city = parts[parts.length - 1];
+        city = decodeURIComponent(parts[parts.length - 1]);
     });
 </script>
 
 {#if weatherData}
-    <section class="hero-section w-full md:w-1/2">
+    <section class="hero-section">
         <div class="hero-wrapper">
             {#if $page.url.pathname === '/'}
-                <h2 class="hero-title">Matthijs' location</h2>
+                <h2 class="hero-title">My Location</h2>
                 <p class="hero-subtitle">Obdam</p>
             {:else}
                 <h2 class="hero-title">{city}</h2>
@@ -29,42 +29,33 @@
                     {
                         new Date(weatherData.currentTime).toLocaleDateString(
                             "en-us",
-                            {
-                                weekday: "short",
-                                day: "2-digit",
-                                month: "short"
-                            }
+                            { weekday: "short", day: "2-digit", month: "short" }
                         )
                     }
                     {
                         new Date(weatherData.currentTime).toLocaleTimeString(
                             "en-us",
-                            {
-                                timeStyle: "short"
-                            }
+                            { timeStyle: "short" }
                         )
                     }
                 </p>
             {/if}
 
-            <!--            <p class="hero-temperature">8&deg;C</p>-->
             <p class="hero-temperature">
-                { Math.round(weatherData.current.temp)}&deg;{unitSymbol}
+                {Math.round(weatherData.current.temp)}&deg;{unitSymbol}
             </p>
 
             <section class="hero-description">
                 <p class="hero-feeltemp">
-                    Feels like { Math.round(weatherData.current.feels_like)}&deg;{unitSymbol}
+                    Feels like {Math.round(weatherData.current.feels_like)}&deg;{unitSymbol}
                 </p>
-                <!--                <p>Few Clouds</p>-->
-                { weatherData.current.weather[0].description}
+                {weatherData.current.weather[0].description}
             </section>
+
             <div class="hero-icon__container">
-                <div class="hero-icon__wrapper">
-                    <img src={`https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
-                         alt="Current weather icon"
-                         class="hero-icon__image">
-                </div>
+                <img src={`https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`}
+                     alt="Current weather icon"
+                     class="hero-icon__image">
             </div>
         </div>
     </section>
@@ -72,59 +63,64 @@
 
 <style>
     .hero-section {
-        display: flex;
-        justify-content: center;
+        width: 100%;
     }
 
     .hero-wrapper {
-        padding: 3em 0;
+        padding: 2em 0;
         text-align: center;
     }
 
     .hero-title {
-        font-size: 32px;
+        font-size: 28px;
+        font-weight: 600;
         margin-bottom: 2px;
     }
 
     .hero-subtitle {
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
-        font-weight: bold;
-
+        font-weight: 500;
+        opacity: 0.7;
     }
 
     .hero-temperature {
-        margin-top: -2px;
-        font-size: 96px;
+        font-size: 86px;
         font-weight: 200;
         letter-spacing: -2px;
-        margin-bottom: 2px;
+        line-height: 1;
+        margin: 4px 0;
     }
 
     .hero-description {
-        font-size: 20px;
-        font-weight: bold;
+        font-size: 18px;
+        font-weight: 500;
+        opacity: 0.9;
     }
 
     .hero-feeltemp {
         margin-bottom: 4px;
+        font-weight: 400;
     }
 
     .hero-icon__container {
-        width: 100%;
         display: flex;
         justify-content: center;
-    }
-
-    .hero-icon__wrapper {
-        margin-top: -15px;
-        width: 150px;
-        height: 150px;
+        margin-top: -10px;
     }
 
     .hero-icon__image {
-        width: 100%;
-        height: auto;
+        width: 120px;
+        height: 120px;
     }
 
+    @media (min-width: 768px) {
+        .hero-title {
+            font-size: 34px;
+        }
+
+        .hero-temperature {
+            font-size: 96px;
+        }
+    }
 </style>

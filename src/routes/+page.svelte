@@ -143,18 +143,30 @@ temperatureUnit.subscribe(async (unit) => {
 	}
 
 	.saved-list {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr;
 		gap: 0.75em;
+	}
+
+	@media (min-width: 768px) {
+		.saved-list {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.saved-list {
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 
 	.empty-state {
 		text-align: center;
 		padding: 2em 1em;
-		background: rgba(255, 255, 255, 0.08);
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-		border: 1px solid rgba(255, 255, 255, 0.15);
+		background: var(--glass-bg);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
+		border: 1px solid var(--glass-border);
 		border-radius: 16px;
 		display: flex;
 		flex-direction: column;

@@ -134,11 +134,11 @@
 
 <style>
     .navigation-background {
-        z-index: 1;
+        z-index: 10;
         width: 100vw;
         height: 100vh;
         background: var(--search-background);
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
     }
@@ -147,11 +147,31 @@
         padding: .5em 1rem 2em;
         margin: 0 auto;
         width: 100%;
-        max-width: 1280px;
+        max-width: 600px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    @media (min-width: 1024px) {
+        .navigation-background {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 80px;
+        }
+
+        .navigation-container {
+            background: var(--search-background);
+            border-radius: 20px;
+            max-height: 80vh;
+            height: auto;
+            padding: 1.5em;
+        }
     }
 
     .search-result__wrapper {

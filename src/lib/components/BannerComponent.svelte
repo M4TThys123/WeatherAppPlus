@@ -38,13 +38,14 @@
         width: 100%;
         display: flex;
         gap: 1em;
-        font-size: 14px;
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        font-size: 13px;
+        background: var(--glass-bg);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--glass-border);
         border-radius: 16px;
         text-align: center;
+        margin-bottom: 0.5em;
     }
 
 

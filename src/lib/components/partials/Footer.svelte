@@ -51,9 +51,10 @@
 
 <style>
     footer {
-        background-color: #14151A;
+        background-color: rgba(0, 0, 0, 0.3);
         color: var(--light);
         padding-top: 2em;
+        margin-top: auto;
     }
 
     .footer-container {

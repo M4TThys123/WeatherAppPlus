@@ -3,81 +3,80 @@
     export let weatherData
 </script>
 
-<section class="hourly-weather-section">
+<section class="hourly-section">
     {#if weatherData}
-        <h2 class="hourly-weather-title">Hourly Weather</h2>
+        <h2 class="section-label">Hourly Forecast</h2>
 
-        <div class="hourly-weather-wrapper">
-            <div class="hourly-weather-items">
-                {#each weatherData.hourly as hourData (hourData.dt)}
-                    <div class="hourly-weather-item shrink-0 grow basis-0">
-                        <p class="hourly-weather-time">
-                            {new Date(hourData.currentTime).toLocaleTimeString("en-us", {hour: "numeric"})}
-                        </p>
-                        <img
-                                class="hourly-weather-image"
-                                src={`https://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`}
-                                alt=""
-                        />
-                        <p class="hourly-weather-temp">
-                            {Math.round(hourData.temp)}&deg;
-                        </p>
-                    </div>
-                {/each}
-            </div>
+        <div class="hourly-scroll">
+            {#each weatherData.hourly as hourData (hourData.dt)}
+                <div class="hour-item">
+                    <p class="hour-time">
+                        {new Date(hourData.currentTime).toLocaleTimeString("en-us", {hour: "numeric"})}
+                    </p>
+                    <img
+                        class="hour-icon"
+                        src={`https://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`}
+                        alt=""
+                    />
+                    <p class="hour-temp">
+                        {Math.round(hourData.temp)}&deg;
+                    </p>
+                </div>
+            {/each}
         </div>
-    {:else}
-        <p>Loading...</p>
     {/if}
 </section>
 
 <style>
-    .hourly-weather-section {
-        max-width: 1024px;
+    .hourly-section {
         width: 100%;
-        padding: 3rem 0!important;
-        color: white;
+        padding: 1.5em 0;
     }
 
-    .hourly-weather-wrapper {
-        display: flex;
-        gap: 2.5rem;
-        overflow-x: auto;
-    }
-
-    .hourly-weather-title {
-        margin-bottom: 1rem;
+    .section-label {
         font-size: 11px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         font-weight: 500;
         opacity: 0.6;
+        margin-bottom: 0.75em;
     }
 
-    .hourly-weather-items {
+    .hourly-scroll {
         display: flex;
-        gap: 1.5em;
+        gap: 1em;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .hourly-weather-item {
+    .hourly-scroll::-webkit-scrollbar {
+        height: 0;
+        display: none;
+    }
+
+    .hour-item {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
         align-items: center;
+        gap: 0.5em;
+        flex-shrink: 0;
+        min-width: 60px;
     }
 
-    .hourly-weather-time {
+    .hour-time {
         white-space: nowrap;
-        font-size: 1.125rem;
+        font-size: 14px;
+        font-weight: 500;
     }
 
-    .hourly-weather-image {
-        width: auto;
-        height: 50px;
-        object-fit: cover;
+    .hour-icon {
+        width: 44px;
+        height: 44px;
     }
 
-    .hourly-weather-temp {
-        font-size: 1.5rem;
+    .hour-temp {
+        font-size: 18px;
+        font-weight: 500;
     }
 </style>
