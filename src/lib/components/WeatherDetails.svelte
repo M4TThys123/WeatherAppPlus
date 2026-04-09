@@ -1,6 +1,7 @@
 <script>
     import { temperatureUnit } from '$lib/stores/weather.js';
     import { t } from '$lib/stores/i18n.js';
+    import SunriseSunset from './SunriseSunset.svelte';
 
     /** @type {any} */
     export let weatherData;
@@ -73,6 +74,8 @@
                 <span class="detail-value">--</span>
                 <span class="detail-sub">hPa</span>
             </div>
+
+            <SunriseSunset {weatherData} />
         </div>
     </section>
 {/if}

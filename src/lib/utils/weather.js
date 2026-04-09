@@ -97,6 +97,8 @@ export function transformOpenMeteoData(data) {
 		},
 		timezone_offset: data.utc_offset_seconds,
 		currentTime: Date.now(),
+		sunrise: data.daily?.sunrise?.[0] || null,
+		sunset: data.daily?.sunset?.[0] || null,
 		hourly,
 		daily
 	};

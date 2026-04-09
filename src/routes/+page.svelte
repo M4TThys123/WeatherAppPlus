@@ -31,7 +31,7 @@ async function getWeatherData(/** @type {number} */ lat, /** @type {number} */ l
 		error = null;
 		const units = $temperatureUnit === 'imperial' ? '&temperature_unit=fahrenheit' : '';
 		const response = await fetch(
-			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,weather_code,is_day,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index,visibility&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7${units}`
+			`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,apparent_temperature,weather_code,is_day,relative_humidity_2m,wind_speed_10m,wind_direction_10m,uv_index,visibility&hourly=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code,sunrise,sunset&timezone=auto&forecast_days=7${units}`
 		);
 		if (!response.ok) throw new Error('Weerdata kon niet worden opgehaald');
 		const data = await response.json();
