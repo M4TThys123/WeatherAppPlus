@@ -1,0 +1,20 @@
+{
+	"name": "WeatherAppPlus",
+	"short_name": "WeatherApp+",
+	"description": "Een moderne weer-applicatie: actueel weer, uurlijkse voorspellingen en een 7-daagse forecast voor elke locatie ter wereld.",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"theme_color": "#52A4DA",
+	"background_color": "#0d1b2a",
+	"icons": [
+		{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+		{ "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+		{
+			"src": "/icon-maskable-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	]
+}
